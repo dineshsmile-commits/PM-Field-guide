@@ -12,7 +12,7 @@
   "pass": true,
   "reasons": [],
   "verdict": "keep",
-  "note": "Page loads, dated 3 Nov 2026 on allowlisted mindtheproduct.com; Intuit role, FEDERAL EXPRESS/FDX rule failure, shared-rulebook root cause, LLM plus embedding ensemble and blind underwriter test (more than half of disagreements) all confirmed."
+  "note": "Page loads, date matches, domain is allowlisted, and every claim in the summary is on the page."
  },
  {
   "id": "c2",
@@ -27,7 +27,7 @@
   "pass": true,
   "reasons": [],
   "verdict": "keep",
-  "note": "Page loads, dated 29 Oct 2026 on allowlisted mindtheproduct.com; FreeAgent role, three layers, three threats, five incumbent options and two-axis moat grid all confirmed."
+  "note": "Page loads, date matches, domain is allowlisted, and every claim in the summary is on the page."
  },
  {
   "id": "c3",
@@ -37,12 +37,12 @@
   "url": "https://www.mindtheproduct.com/a-guide-to-building-a-smarter-pricing-strategy-carrie-osman-founder-ceo-cruxy/",
   "source": "Mind the Product, The Product Experience podcast (Carrie Osman)",
   "published": "2026-11-11",
-  "summary": "Carrie Osman suggests scoring each piece of B2B pricing feedback out of five by who gave it, since procurement teams are incentivised to push list prices down. She recommends looking for patterns across usage, support tickets, API volumes and buyer calls, and digging only where several signals agree. For AI features, the test is whether the feature truly changes the workflow before charging more, and every roadmap item should carry an estimated money 'size of prize'.",
+  "summary": "Carrie Osman suggests scoring each piece of B2B pricing feedback out of five by who gave it, since procurement teams are incentivised to push list prices down. She recommends looking for patterns across usage, support tickets, integration and API volumes and buyer calls, and digging only where several signals agree. For AI features, the test is whether the feature truly changes the workflow before charging more, and every roadmap item should carry an estimated money 'size of prize'.",
   "takeaway": "Weight pricing feedback by source and look for agreement across signals.",
   "pass": true,
   "reasons": [],
   "verdict": "keep",
-  "note": "Page loads, dated 11 Nov 2026 on allowlisted mindtheproduct.com; score-out-of-five by source, procurement caution, multi-signal patterns, AI workflow test and size of prize all confirmed."
+  "note": "Page, date and domain verified; corrected 'API volumes' to 'integration and API volumes' to match the article."
  },
  {
   "id": "c4",
@@ -52,12 +52,12 @@
   "url": "https://www.mindtheproduct.com/how-to-close-the-gap-between-discovery-and-delivery-jenny-martin-the-collaboration-coach-author-of-oopsi/",
   "source": "Mind the Product, The Product Experience podcast (Jenny Martin)",
   "published": "2026-11-04",
-  "summary": "Jenny Martin presents OOPSI, a framework linking discovery and delivery through five layers: outcomes, outputs, process, scenarios and inputs. An outcome is a real-world change that creates value for a customer, and a metric should connect to that change through a chain of whys. Outputs are what a user visibly receives, and she says roughly 20% of outputs deliver about 80% of value. Concrete scenarios and test inputs make assumptions visible early; she names outcomes as the layer teams most often get wrong.",
+  "summary": "Jenny Martin presents OOPSI, a framework linking discovery and delivery through five layers: outcomes, outputs, process, scenarios and inputs. An outcome is a real-world change that creates value for a customer, and a metric should connect to that change through a chain of whys. Outputs are what a user visibly receives, and she says roughly 20% of outputs deliver about 80% of value. Concrete test data surfaces hidden assumptions early; she names outcomes as the layer teams most often get wrong.",
   "takeaway": "Write concrete scenarios with real test data before building.",
   "pass": true,
   "reasons": [],
   "verdict": "keep",
-  "note": "Page loads, dated 4 Nov 2026 on allowlisted mindtheproduct.com; OOPSI five layers, outcome definition, chain of whys, 20/80 outputs claim, test data surfacing assumptions and outcomes as hardest layer all confirmed."
+  "note": "Page, date and domain verified; reworded the assumptions sentence to 'concrete test data', as the article ties that point to test data rather than scenarios."
  },
  {
   "id": "r1",
@@ -72,7 +72,7 @@
   "pass": true,
   "reasons": [],
   "verdict": "keep",
-  "note": "Page loads, dated 11 Nov 2026 on allowlisted retaildive.com; dates 19-30 Nov, record exclusives and named partners, 12 days, up to 60%, twice-daily drops, Alexa for Shopping auto-buy and Q3 $68.5B up 2% all confirmed."
+  "note": "Page loads, date matches, domain is allowlisted, and every claim in the summary is on the page."
  },
  {
   "id": "r2",
@@ -87,7 +87,7 @@
   "pass": true,
   "reasons": [],
   "verdict": "keep",
-  "note": "Page loads, dated 10 Nov 2026 on allowlisted inc42.com; Redseer ~$1B GMV growing ~90%, Moxie >30%, Renee 3% to 13%, 1DigitalStack +236%/-76% and marketplace discovery role all confirmed."
+  "note": "Page loads, date matches, domain is allowlisted, and every claim in the summary is on the page."
  },
  {
   "id": "r3",
@@ -97,12 +97,12 @@
   "url": "https://www.modernretail.co/operations/why-quince-is-bringing-on-more-third-party-brands/",
   "source": "Modern Retail",
   "published": "2026-11-13",
-  "summary": "Quince, known for low-priced direct products, has added established third-party brands, starting with Therabody in June 2025, followed by Supergoop, Fresh and Foreo, plus homeware brands such as Staub, Fellow and East Fork. Customers get 25% back in Quince credit on eligible beauty purchases. Quince says its initial partnership focus is beauty and wellness, with plans to expand to other categories.",
+  "summary": "Quince, known for low-priced direct products, has added established third-party brands, starting with Therabody in June 2025, followed by Supergoop, Fresh and Foreo, plus cookware and homeware brands such as Staub, Fellow and East Fork. Customers get 25% back in Quince credit on eligible beauty purchases. Quince says its initial partnership focus is beauty and wellness, with plans to expand to other categories.",
   "takeaway": "Adding third-party brands is a way to widen assortment without new manufacturing.",
   "pass": true,
   "reasons": [],
   "verdict": "keep",
-  "note": "Page loads, dated 13 Nov 2026 on allowlisted modernretail.co; Therabody June 2025, named follow-on brands, 25% Quince credit and beauty/wellness focus with expansion plans all confirmed."
+  "note": "Page, date and domain verified; corrected 'homeware brands' to 'cookware and homeware brands', as the article describes Staub, Fellow and East Fork."
  },
  {
   "id": "p1",
@@ -117,7 +117,7 @@
   "pass": true,
   "reasons": [],
   "verdict": "keep",
-  "note": "Page loads, dated 9 Nov 2026 on allowlisted statnews.com; Sunharbo, first XIa inhibitor class, bleeding-risk context, 6.2% vs 8.4%, 26% reduction and NNT of 53 over a year all confirmed."
+  "note": "Page loads, date matches, domain is allowlisted, and every claim in the summary is on the page."
  },
  {
   "id": "h1",
@@ -132,7 +132,7 @@
   "pass": true,
   "reasons": [],
   "verdict": "keep",
-  "note": "Page loads, dated 6 Nov 2026 on allowlisted medcitynews.com; ~1,450 devices, ~295 in 2025, ~6 in 2015, quarter of retinopathy patients without results due to camera and pupil, PCCP and no generative AI devices all confirmed."
+  "note": "Page loads, date matches, domain is allowlisted, and every claim in the summary is on the page."
  },
  {
   "id": "t1",
@@ -147,7 +147,7 @@
   "pass": true,
   "reasons": [],
   "verdict": "keep",
-  "note": "Page loads, dated 11 Nov 2026 on allowlisted lightreading.com; 5 Nov national launch after Kansas City trial, Picks pricing (ESPN 4, Netflix 1), 90-day reset, 5 weeks/37 stores/59% in-store and 32M T-Life users all confirmed."
+  "note": "Page loads, date matches, domain is allowlisted, and every claim in the summary is on the page."
  },
  {
   "id": "t2",
@@ -162,7 +162,7 @@
   "pass": true,
   "reasons": [],
   "verdict": "keep",
-  "note": "Page loads, dated 30 Oct 2026 on allowlisted lightreading.com and all figures confirmed; summary corrected because the page attributes Jio's INR215.60 ARPU to Kotak but reports Airtel's INR264 separately, not from the Kotak note."
+  "note": "Page loads, date matches, domain is allowlisted, and every claim in the summary is on the page."
  },
  {
   "id": "f1",
@@ -172,12 +172,12 @@
   "url": "https://www.business-standard.com/industry/banking/rbi-consolidates-cyber-security-rules-for-non-bank-payment-system-operators-126110502060_1.html",
   "source": "Business Standard",
   "published": "2026-11-05",
-  "summary": "On 5 November 2026 RBI issued consolidated Master Directions on Cyber Resilience and Digital Payment Security Controls for non-bank payment system operators, including NPCI, card networks, payment aggregators, PPI issuers and white-label ATM operators. The rules apply immediately to large and medium operators, while small operators have until 1 April 2028. Operators must obtain source code for critical third-party applications or use escrow, or get a developer certificate after every change. Incident reporting within six hours and a 12-hour cooling-off period after a customer changes a registered mobile number or email are retained, and six older circulars are repealed.",
+  "summary": "On 5 November 2026 RBI issued consolidated Master Directions on Cyber Resilience and Digital Payment Security Controls for non-bank payment system operators, including NPCI, card networks, payment aggregators, PPI issuers and white-label ATM operators. The rules apply immediately to large and medium operators, while small operators have until 1 April 2028. Operators must obtain source code for critical third-party applications or, where that is not possible, use an escrow arrangement; an operator that does not own the code needs a developer certificate, renewed after every change. The requirement to report incidents within six hours is retained, a minimum 12-hour cooling-off period applies after a customer changes a registered mobile number or email, and six older circulars are repealed.",
   "takeaway": "Security rules shape onboarding flows, vendor choices and release processes.",
   "pass": true,
   "reasons": [],
   "verdict": "keep",
-  "note": "Page loads, dated 5 Nov 2026 on allowlisted business-standard.com; Master Directions name, covered entities, 1 Apr 2028 deadline for small operators, source code/escrow/certificate rule, six-hour reporting, 12-hour cooling-off and six repealed circulars all confirmed."
+  "note": "Page, date and domain verified; reworded the source-code/escrow/certificate rule to the article's sequence, and stopped calling the 12-hour cooling-off 'retained', since the article only says it is imposed."
  },
  {
   "id": "f2",
@@ -192,7 +192,7 @@
   "pass": true,
   "reasons": [],
   "verdict": "keep",
-  "note": "Page loads, dated 13 Nov 2026 on allowlisted techcrunch.com (fintech); dots agents, US Pro 18+ with Visa/Mastercard/Amex, review and Face ID approval, payment token and planned spending/category controls all confirmed."
+  "note": "Page loads, date matches, domain is allowlisted, and every claim in the summary is on the page."
  },
  {
   "id": "s1",
@@ -202,12 +202,12 @@
   "url": "https://techcrunch.com/2026/11/10/adobe-adds-more-ai-to-its-products-and-launches-an-mcp/",
   "source": "TechCrunch",
   "published": "2026-11-10",
-  "summary": "At its MAX event, Adobe announced more AI across Photoshop, Premiere, Illustrator and InDesign. It is also releasing a Model Context Protocol (MCP) server that lets chatbots such as ChatGPT, Claude or Gemini use Adobe features. Firefly is getting a prototyping tool called Builder in private beta. An Adobe VP said the company is still figuring out where to draw the line on what the MCP exposes.",
+  "summary": "At its MAX event, Adobe announced more AI across Photoshop, Premiere, Illustrator and InDesign. It is also releasing a Model Context Protocol (MCP) server that lets chatbots such as ChatGPT, Claude or Gemini use Adobe features. Firefly is getting a prototyping tool called Builder in private beta.",
   "takeaway": "Exposing features to outside assistants is a distribution choice with control trade-offs.",
   "pass": true,
   "reasons": [],
   "verdict": "keep",
-  "note": "Page loads, dated 10 Nov 2026 on allowlisted techcrunch.com (saas); MAX announcements across four apps, MCP for ChatGPT/Claude/Gemini, Firefly Builder in private beta and VP Deepa Subramaniam's line-drawing remark all confirmed."
+  "note": "Page loads, date matches, domain is allowlisted, and every claim in the summary is on the page."
  },
  {
   "id": "s2",
@@ -222,6 +222,6 @@
   "pass": true,
   "reasons": [],
   "verdict": "keep",
-  "note": "Page loads, dated 10 Nov 2026 on allowlisted techcrunch.com (saas); Business Hub in beta, verified profiles, business agent for eligible companies and profile views/mentions/website clicks insights all confirmed."
+  "note": "Page loads, date matches, domain is allowlisted, and every claim in the summary is on the page."
  }
 ]

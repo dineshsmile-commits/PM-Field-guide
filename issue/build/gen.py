@@ -15,7 +15,7 @@ DIV='<div style="border-top:1px solid #eadfd2;margin:16px 0;"></div>'
 big = (f'<p style="{LBL}">The big sip</p>'
  f'<h2 style="font-family:{SER};font-size:23px;line-height:1.3;color:#2b2420;margin:0 0 6px 0;">{a("RBI tightens cyber oversight of non-bank payment system operators","https://www.business-standard.com/industry/banking/rbi-consolidates-cyber-security-rules-for-non-bank-payment-system-operators-126110502060_1.html")}</h2>'
  f'<p style="{META}">Business Standard · 5 November 2026</p>'
- f'<p style="{P}"><strong style="{G}">What happened:</strong> On 5 November, RBI issued consolidated Master Directions on Cyber Resilience and Digital Payment Security Controls for non-bank payment system operators, including NPCI, card networks, payment aggregators and wallet issuers. Large and medium operators must comply now; small ones have until 1 April 2028. Operators need source code (or escrow, or a fresh developer certificate) for critical third-party apps, must report incidents within six hours, and keep a 12-hour cooling-off after a customer changes a registered mobile number or email.</p>'
+ f'<p style="{P}"><strong style="{G}">What happened:</strong> On 5 November, RBI issued consolidated Master Directions on Cyber Resilience and Digital Payment Security Controls for non-bank payment system operators, including NPCI, card networks, payment aggregators and wallet issuers. Large and medium operators must comply now; small ones have until 1 April 2028. Operators must get source code for critical third-party apps or use escrow, report incidents within six hours, and apply a 12-hour cooling-off after a customer changes a registered mobile number or email.</p>'
  f'<p style="{P}"><strong style="{G}">Why it matters:</strong> Rules like these land directly in the product: onboarding, account recovery, vendor choice and release cadence. One rulebook replacing six older circulars also makes compliance easier to reason about.</p>'
  f'<p style="{P}"><strong style="{G}">If you were the PM:</strong> Map every flow that touches a number or email change, and decide how to explain the 12-hour wait so it feels like protection. List your critical vendor apps and check the source-code position for each, since that shapes your release process. Then ask what six-hour incident reporting looks like at 2 am.</p>')
 
@@ -64,7 +64,7 @@ fw=(f'<p style="{LBL}">Framework of the fortnight</p><h3 style="{H3}">Kano model
  f'{a("Explore Kano and the other frameworks","https://dineshsmile-commits.github.io/PM-Field-guide/#frameworks")}.</p>')
 
 chew=(f'<p style="{LBL}">Something to chew on</p>'
- f'<p style="{P}font-family:{SER};font-size:18px;"><em>"You are the PM for a payment app. RBI\'s rules require a 12-hour cooling-off period before online payments after a user changes their registered mobile number or email. How would you implement it without losing users?"</em></p>'
+ f'<p style="{P}font-family:{SER};font-size:18px;"><em>"You are the PM for a payment app. RBI\'s rules require a 12-hour cooling-off period after a user changes their registered mobile number or email. How would you implement it without losing users?"</em></p>'
  f'<p style="{P}margin-bottom:6px;">A strong answer covers:</p>'
  f'<ul style="{P}padding-left:20px;margin-top:0;">'
  '<li style="margin-bottom:6px;">The user and the risk: who changes numbers, and how the wait blocks account takeover.</li>'
@@ -72,7 +72,7 @@ chew=(f'<p style="{LBL}">Something to chew on</p>'
  '<li style="margin-bottom:6px;">The metrics: drop-off and support tickets against fraud losses, with edge cases checked with compliance.</li></ul>')
 
 pour=(f'<p style="{LBL}">Pour yourself a cup</p>'
- f'<p style="{P}">Welcome to the very first Product Over Chai. This fortnight kept circling one idea: trust. RBI rewrote the security rules for payment apps, an AI assistant started paying on people\'s behalf, and a health writer reminded us that medical AI\'s hard part begins after approval. Inside: one big story, six quick sips, two reads and an interview question.</p>'
+ f'<p style="{P}">Welcome to Product Over Chai. This fortnight kept circling one idea: trust. RBI rewrote the security rules for payment apps, an AI assistant started paying on people\'s behalf, and a health writer reminded us that medical AI\'s hard part begins after approval. Inside: one big story, six quick sips, two reads and an interview question.</p>'
  f'<p style="{P}font-style:italic;">Team PM Field Guide</p>')
 
 last=(f'<p style="{LBL}">Last sip</p><p style="{P}">Payment rules, shopping agents and medical AI all said the same thing this fortnight: people trust products that plan for what can go wrong.</p>'
@@ -80,7 +80,7 @@ last=(f'<p style="{LBL}">Last sip</p><p style="{P}">Payment rules, shopping agen
 
 mast=(f'<tr><td style="background:#3b2416;border-radius:6px 6px 0 0;padding:28px 24px 24px 24px;text-align:left;">'
  f'<p style="font-family:{SER};font-size:30px;line-height:1.2;color:#fbf6ee;margin:0 0 8px 0;font-weight:bold;">☕ Product Over Chai</p>'
- f'<p style="font-family:{SANS};font-size:14px;line-height:1.5;color:#fbf6ee;margin:0 0 4px 0;">A fortnightly 5-minute read for aspiring PMs · Issue 1 · 15 November 2026</p>'
+ f'<p style="font-family:{SANS};font-size:14px;line-height:1.5;color:#fbf6ee;margin:0 0 4px 0;">A fortnightly 5-minute read for aspiring PMs · Test issue · 13 November 2026</p>'
  f'<p style="font-family:{SANS};font-size:12px;letter-spacing:1.5px;text-transform:uppercase;color:#e6d6c2;margin:0;">by PM Field Guide</p></td></tr>'
  '<tr><td style="height:20px;line-height:20px;font-size:0;">&nbsp;</td></tr>')
 
@@ -95,9 +95,9 @@ body=(f'<div style="display:none;max-height:0;overflow:hidden;opacity:0;">{previ
  f'<table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="max-width:600px;width:100%;">'
  + mast + card(pour) + card(big,"#eef3ec") + card(sipsh) + card(booksh) + card(fw) + card(chew,"#ffffff","border-left:4px solid #4f7a52;") + card(last) + foot +
  '</table></td></tr></table>')
-title="Product Over Chai, Issue 1, 15 November 2026"
+title="Product Over Chai, Test issue, 13 November 2026"
 frag=(f'<title>{title}</title>\n<style>body{{background:#f4ece1;margin:0;}}</style>\n'+body)
-open('../issue_artifact.html','w').write(frag)
+open('../issue_test_artifact.html','w').write(frag)
 full=(f'<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>{title}</title></head>'
  f'<body style="margin:0;padding:0;background:#f4ece1;">{body}</body></html>')
 open('../issue.html','w').write(full)

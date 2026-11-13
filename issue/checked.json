@@ -137,7 +137,7 @@
   "url": "https://www.lightreading.com/finance/can-jio-s-stock-market-debut-reset-india-s-telecom-pricing-",
   "source": "Light Reading",
   "published": "2026-10-30",
-  "summary": "Light Reading describes Reliance Jio Platforms' $3.2 billion IPO as the largest in India's history; Jio says it has more than 530 million telecom subscribers. A Kotak note puts Jio's ARPU at INR215.60 for the June 2026 quarter, against Airtel's INR264, and Airtel has said mobile ARPU must rise above INR300. Per media reports, Nomura expects a possible 15% industry-wide tariff hike in November-December 2026. After Jio's July 2024 price rises, it lost around 12.74 million subscribers between July and September 2024.",
+  "summary": "Light Reading describes Reliance Jio Platforms' $3.2 billion IPO as the largest in India's history; Jio says it has more than 530 million telecom subscribers. A Kotak note puts Jio's ARPU at INR215.60 for the June 2026 quarter; Airtel reported INR264 for the same quarter, and Airtel has said mobile ARPU must rise above INR300. Per media reports, Nomura expects a possible 15% industry-wide tariff hike in November-December 2026. After Jio's July 2024 price rises, it lost around 12.74 million subscribers between July and September 2024.",
   "takeaway": "ARPU versus churn is the core trade-off behind every tariff decision.",
   "pass": true,
   "reasons": []
@@ -176,7 +176,7 @@
   "url": "https://techcrunch.com/2026/11/10/adobe-adds-more-ai-to-its-products-and-launches-an-mcp/",
   "source": "TechCrunch",
   "published": "2026-11-10",
-  "summary": "At its MAX event, Adobe announced more AI across Photoshop, Premiere, Illustrator and InDesign. It is also releasing a Model Context Protocol (MCP) server that lets chatbots such as ChatGPT, Claude or Gemini use Adobe features. Firefly is getting a prototyping tool called Builder in private beta. An Adobe VP said the company is still figuring out where to draw the line on what the MCP exposes.",
+  "summary": "At its MAX event, Adobe announced more AI across Photoshop, Premiere, Illustrator and InDesign. It is also releasing a Model Context Protocol (MCP) server that lets chatbots such as ChatGPT, Claude or Gemini use Adobe features. Firefly is getting a prototyping tool called Builder in private beta.",
   "takeaway": "Exposing features to outside assistants is a distribution choice with control trade-offs.",
   "pass": true,
   "reasons": []

@@ -85,6 +85,37 @@ body::before { content: ""; position: fixed; inset: 0 0 auto; height: env(safe-a
 section[id], #join { scroll-margin-top: calc(var(--head-h, 64px) + 12px); }
 @media (prefers-reduced-motion: no-preference) { html { scroll-behavior: smooth; } }
 
+/* ---------- Purpose band ---------- */
+.purpose { background: var(--surface); border-bottom: 1px solid var(--line); }
+.purpose .wrap { padding-block: 56px 48px; display: flex; flex-direction: column; gap: 36px; }
+.purpose-head { display: flex; flex-direction: column; gap: 16px; max-width: 44em; }
+.purpose-head h1 { font-size: clamp(2.1rem, 5vw, 3.6rem); }
+.purpose-head h1 em { font-style: normal; color: var(--accent); }
+.purpose-head p { font-size: 1.15rem; color: var(--muted); max-width: 40em; }
+.purpose-cols { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); border-top: 2px solid var(--ink); }
+.purpose-col { padding: 20px 24px 4px 0; display: flex; flex-direction: column; gap: 8px; min-width: 0; }
+.purpose-col + .purpose-col { padding-left: 24px; border-left: 1px solid var(--line); }
+.purpose-col h2 { font-size: 1.2rem; }
+.purpose-col p { color: var(--muted); }
+.purpose-col ol { margin: 0; padding-left: 1.2em; color: var(--muted); display: grid; gap: 4px; }
+.purpose-col ol li::marker { color: var(--accent); font-weight: 700; }
+.covered { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; }
+.covered .label { margin-right: 4px; }
+.covered button { border: 1.5px solid var(--line); background: var(--bg); border-radius: 999px; padding: 6px 12px; font-weight: 600; cursor: pointer; display: inline-flex; gap: 6px; align-items: center; }
+.covered button:hover { border-color: var(--accent); color: var(--accent); }
+.covered button .code { font-family: var(--f-mono); font-size: 0.7rem; color: var(--muted); }
+.hero h2.hero-title { font-size: clamp(1.9rem, 4vw, 2.9rem); font-weight: 800; letter-spacing: -0.02em; }
+@media (max-width: 900px) {
+  .purpose-cols { grid-template-columns: 1fr; }
+  .purpose-col, .purpose-col + .purpose-col { padding: 16px 0; border-left: 0; }
+  .purpose-col + .purpose-col { border-top: 1px solid var(--line); }
+}
+@media (max-width: 700px) {
+  .purpose .wrap { padding-block: 28px 24px; gap: 24px; }
+  .purpose-head p { font-size: 1.05rem; }
+  .covered button { min-height: 40px; }
+}
+
 /* Hero */
 .hero .wrap { display: grid; grid-template-columns: 1.25fr 1fr; gap: 48px; padding-block: 56px 48px; align-items: start; }
 .hero-copy { display: flex; flex-direction: column; gap: 20px; min-width: 0; }
@@ -330,18 +361,46 @@ footer .wrap { padding-block: 24px; color: var(--muted); font-size: 0.9rem; disp
   </div>
 </header>
 
+<section class="purpose" id="about" aria-labelledby="purposeTitle">
+  <div class="wrap">
+    <div class="purpose-head">
+      <span class="label">Why PM Field Guide exists</span>
+      <h1 id="purposeTitle">Product management is taught as one job. <em>It's practised as many.</em></h1>
+      <p>Most courses teach frameworks with examples from consumer apps. But a product manager at a pharma company, a telecom operator or a bank works under different rules, builds for different people and is judged on different numbers. This guide connects the two. It explains the core ideas of product management the way each industry actually uses them.</p>
+    </div>
+    <div class="purpose-cols">
+      <div class="purpose-col">
+        <span class="label">Who it's for</span>
+        <h2>People aiming for a product role in a specific industry</h2>
+        <p>Students, career switchers and first-year PMs, plus working PMs moving into a new domain who need to learn its rules quickly.</p>
+      </div>
+      <div class="purpose-col">
+        <span class="label">What you'll learn</span>
+        <h2>The ideas, the tools and the domain</h2>
+        <p>Eight first principles, eight core frameworks with worked examples, and each industry's regulators, metrics, trends and interview questions.</p>
+      </div>
+      <div class="purpose-col">
+        <span class="label">How to use it</span>
+        <h2>Four steps, in order</h2>
+        <ol>
+          <li>Pick the industry you're aiming for</li>
+          <li>Read the first principles</li>
+          <li>Practise the frameworks</li>
+          <li>Follow the trends, and register for updates</li>
+        </ol>
+      </div>
+    </div>
+    <div class="covered" id="coveredList"><span class="label">Industries covered</span></div>
+  </div>
+</section>
+
 <section class="hero" id="top">
   <div class="wrap">
     <div class="hero-copy">
-      <span class="label">For aspiring product managers</span>
-      <h1>Learn product frameworks the way your industry uses them.</h1>
+      <span class="label">Free for aspiring product managers</span>
+      <h2 class="hero-title">Learn product frameworks the way your industry uses them.</h2>
       <p class="lede">A RICE score in a pharma company weighs regulatory risk. A North Star in telecom is not the same as one in retail. Pick your domain and every framework here re-explains itself for it.</p>
-      <ul class="hero-points">
-        <li>Eight product first principles that every framework is built on</li>
-        <li>Eight core frameworks, each with a worked example for six industries</li>
-        <li>Domain briefs: regulators, metrics and vocabulary you'll hear in interviews</li>
-        <li>A trend digest for the industries you choose, sent to registered members</li>
-      </ul>
+      <p class="lede">Register to get trend updates and new worked examples for the industries you choose, by email.</p>
     </div>
 
     <div class="signup" id="join">
@@ -948,7 +1007,7 @@ selectIndustry = function (id) {
   const sync = () => bar.classList.toggle("show", heroGone && !joinVisible);
   if (!("IntersectionObserver" in window)) { bar.classList.add("show"); return; }
   new IntersectionObserver(([e]) => { joinVisible = e.isIntersecting; sync(); }, { threshold: 0.15 }).observe(document.getElementById("join"));
-  new IntersectionObserver(([e]) => { heroGone = !e.isIntersecting; sync(); }).observe(document.querySelector(".hero h1"));
+  new IntersectionObserver(([e]) => { heroGone = !e.isIntersecting; sync(); }).observe(document.querySelector(".hero .hero-copy"));
 })();
 
 /* ---------- Sticky header: section highlight ---------- */
@@ -983,6 +1042,20 @@ selectIndustry = function (id) {
   window.addEventListener("resize", mark);
   mark();
 })();
+
+/* ---------- Purpose band: industries covered ---------- */
+document.getElementById("coveredList").append(...INDUSTRIES.map(ind => {
+  const b = document.createElement("button");
+  b.type = "button";
+  const c = document.createElement("span"); c.className = "code"; c.textContent = ind.code;
+  b.append(c, document.createTextNode(ind.short));
+  b.setAttribute("aria-label", "Explore " + ind.name);
+  b.addEventListener("click", () => {
+    selectIndustry(ind.id);
+    document.getElementById("industries").scrollIntoView({ behavior: window.matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth" });
+  });
+  return b;
+}));
 
 /* ---------- Registration (Formspree) ----------
    Paste your Formspree form ID between the quotes, e.g. "xyzabcd".

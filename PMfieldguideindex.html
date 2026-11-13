@@ -1,0 +1,1061 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="description" content="Product management frameworks for aspiring PMs, with worked examples for retail, pharma, health sciences, telecom, fintech and SaaS.">
+<title>PM Field Guide</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=Source+Sans+3:wght@400;600;700&family=JetBrains+Mono:wght@400;600&display=swap">
+<style>
+/* Layout: a field-guide index. Industry switcher drives everything below it; frameworks re-explain themselves per industry. */
+:root {
+  --bg: #f3f5f2;
+  --surface: #ffffff;
+  --ink: #15212b;
+  --muted: #56636d;
+  --line: #d8ddd8;
+  --accent: #0b6e69;
+  --accent-ink: #ffffff;
+  --accent-soft: #dcefec;
+  --signal: #e8a317;
+  --signal-soft: #fbf0d6;
+  --danger: #b3261e;
+  --ok: #1d7a3a;
+  --f-display: "Bricolage Grotesque", "Avenir Next", "Segoe UI", system-ui, sans-serif;
+  --f-body: "Source Sans 3", "Segoe UI", system-ui, -apple-system, sans-serif;
+  --f-mono: "JetBrains Mono", ui-monospace, "SFMono-Regular", Menlo, monospace;
+  --r: 10px;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #0f1619; --surface: #172227; --ink: #e6ecea; --muted: #9aa9ac; --line: #2a383d;
+    --accent: #3cbcb2; --accent-ink: #062523; --accent-soft: #143a38;
+    --signal: #f0b43c; --signal-soft: #3a2f14; --danger: #ff8a80; --ok: #6fd18c;
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #0f1619; --surface: #172227; --ink: #e6ecea; --muted: #9aa9ac; --line: #2a383d;
+  --accent: #3cbcb2; --accent-ink: #062523; --accent-soft: #143a38;
+  --signal: #f0b43c; --signal-soft: #3a2f14; --danger: #ff8a80; --ok: #6fd18c;
+  color-scheme: dark;
+}
+* { box-sizing: border-box; }
+body {
+  background: var(--bg); color: var(--ink);
+  font-family: var(--f-body); font-size: 17px; line-height: 1.55;
+}
+.wrap {
+  max-width: 1120px; margin: 0 auto;
+  padding-left: max(16px, env(safe-area-inset-left, 0px));
+  padding-right: max(16px, env(safe-area-inset-right, 0px));
+}
+h1, h2, h3 { font-family: var(--f-display); line-height: 1.12; text-wrap: balance; margin: 0; }
+h1 { font-size: clamp(2.2rem, 5.5vw, 3.9rem); font-weight: 800; letter-spacing: -0.02em; }
+h2 { font-size: clamp(1.6rem, 3.2vw, 2.25rem); font-weight: 700; letter-spacing: -0.01em; }
+h3 { font-size: 1.2rem; font-weight: 700; }
+p { margin: 0; }
+.label {
+  font-family: var(--f-mono); font-size: 0.74rem; letter-spacing: 0.08em;
+  text-transform: uppercase; color: var(--muted);
+}
+a { color: var(--accent); }
+button, input, select { font: inherit; color: inherit; }
+:focus-visible { outline: 3px solid var(--signal); outline-offset: 2px; }
+
+/* Header */
+.top {
+  position: sticky; top: env(safe-area-inset-top, 0px); z-index: 30;
+  background: var(--bg); border-bottom: 1px solid var(--line);
+  transition: box-shadow .2s ease;
+}
+.top.scrolled { box-shadow: 0 4px 18px rgba(0,0,0,.08); }
+body::before { content: ""; position: fixed; inset: 0 0 auto; height: env(safe-area-inset-top, 0px); z-index: 31; background: var(--bg); }
+.top .wrap { display: flex; align-items: center; justify-content: space-between; gap: 16px; padding-block: 10px; }
+.brand { display: flex; align-items: center; gap: 10px; font-family: var(--f-display); font-weight: 800; font-size: 1.15rem; color: var(--ink); text-decoration: none; flex: none; }
+.brand svg { flex: none; }
+.top nav { display: flex; gap: 6px; font-weight: 600; min-width: 0; }
+.top nav a { color: var(--ink); text-decoration: none; padding: 8px 12px; border-radius: 999px; white-space: nowrap; }
+.top nav a:hover { color: var(--accent); }
+.top nav a[aria-current="true"] { background: var(--accent-soft); color: var(--accent); }
+.top nav a.nav-join { background: var(--accent); color: var(--accent-ink); }
+.top nav a.nav-join:hover { filter: brightness(1.08); color: var(--accent-ink); }
+section[id], #join { scroll-margin-top: calc(var(--head-h, 64px) + 12px); }
+@media (prefers-reduced-motion: no-preference) { html { scroll-behavior: smooth; } }
+
+/* Hero */
+.hero .wrap { display: grid; grid-template-columns: 1.25fr 1fr; gap: 48px; padding-block: 56px 48px; align-items: start; }
+.hero-copy { display: flex; flex-direction: column; gap: 20px; min-width: 0; }
+.hero-copy .lede { font-size: 1.2rem; color: var(--muted); max-width: 34em; }
+.hero-points { display: grid; gap: 10px; padding: 0; margin: 0; list-style: none; }
+.hero-points li { display: flex; gap: 10px; align-items: baseline; }
+.hero-points li::before { content: ""; flex: none; width: 8px; height: 8px; border-radius: 2px; background: var(--accent); transform: translateY(-2px); }
+
+/* Signup card */
+.signup { background: var(--surface); border: 1px solid var(--line); border-radius: 14px; padding: 24px; display: flex; flex-direction: column; gap: 16px; min-width: 0; }
+.signup h3 { font-size: 1.35rem; }
+.field { display: flex; flex-direction: column; gap: 6px; }
+.field > label, .field > .flabel { font-weight: 600; font-size: 0.95rem; }
+.field input[type=text], .field input[type=email], .field select {
+  width: 100%; padding: 10px 12px; border: 1.5px solid var(--line); border-radius: 8px; background: var(--bg);
+}
+.field input:focus, .field select:focus { border-color: var(--accent); outline: none; }
+.checks { display: flex; flex-wrap: wrap; gap: 8px; }
+.check { position: relative; }
+.check input { position: absolute; opacity: 0; inset: 0; cursor: pointer; }
+.check span { display: inline-block; padding: 6px 12px; border: 1.5px solid var(--line); border-radius: 999px; font-size: 0.92rem; cursor: pointer; user-select: none; }
+.check input:checked + span { background: var(--accent); border-color: var(--accent); color: var(--accent-ink); }
+.check input:focus-visible + span { outline: 3px solid var(--signal); outline-offset: 2px; }
+.consent { display: flex; gap: 10px; align-items: flex-start; font-size: 0.92rem; color: var(--muted); }
+.consent input { margin-top: 4px; accent-color: var(--accent); }
+.btn { border: 0; border-radius: 8px; padding: 12px 18px; font-weight: 700; cursor: pointer; background: var(--accent); color: var(--accent-ink); }
+.btn:hover { filter: brightness(1.08); }
+.btn[disabled] { opacity: 0.6; cursor: wait; }
+.btn.ghost { background: transparent; color: var(--accent); border: 1.5px solid var(--accent); }
+.form-msg { font-size: 0.95rem; }
+.form-msg.err { color: var(--danger); }
+.done { display: flex; flex-direction: column; gap: 12px; }
+.done .tick { width: 44px; height: 44px; border-radius: 50%; background: var(--accent-soft); color: var(--accent); display: grid; place-items: center; font-weight: 800; font-size: 1.3rem; }
+
+/* Industry switcher */
+.section { padding-block: 48px; border-top: 1px solid var(--line); }
+.section-head { display: flex; flex-direction: column; gap: 8px; margin-bottom: 24px; max-width: 46em; }
+.section-head p { color: var(--muted); }
+.tabs { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 24px; }
+.tab {
+  display: flex; align-items: center; gap: 8px; padding: 10px 16px; border-radius: 999px;
+  border: 1.5px solid var(--line); background: var(--surface); cursor: pointer; font-weight: 600;
+}
+.tab .code { font-family: var(--f-mono); font-size: 0.72rem; color: var(--muted); }
+.tab[aria-selected="true"] { background: var(--ink); color: var(--bg); border-color: var(--ink); }
+.tab[aria-selected="true"] .code { color: var(--bg); opacity: 0.7; }
+
+.brief { display: grid; grid-template-columns: 1.1fr 1fr 1fr; gap: 0; background: var(--surface); border: 1px solid var(--line); border-radius: 14px; overflow: hidden; }
+.brief > div { padding: 22px; display: flex; flex-direction: column; gap: 10px; min-width: 0; }
+.brief > div + div { border-left: 1px solid var(--line); }
+.brief .intro p { color: var(--muted); }
+.brief ul { margin: 0; padding-left: 1.1em; display: grid; gap: 6px; }
+.chips { display: flex; flex-wrap: wrap; gap: 6px; }
+.chip { font-family: var(--f-mono); font-size: 0.8rem; padding: 3px 8px; border-radius: 6px; background: var(--accent-soft); color: var(--ink); }
+.chip.reg { background: var(--signal-soft); }
+
+/* Frameworks */
+.fw-tools { display: flex; gap: 12px; flex-wrap: wrap; align-items: center; margin-bottom: 18px; }
+.fw-tools input { flex: 1 1 260px; min-width: 0; padding: 10px 12px; border: 1.5px solid var(--line); border-radius: 8px; background: var(--surface); }
+.fw-tools select { padding: 10px 12px; border: 1.5px solid var(--line); border-radius: 8px; background: var(--surface); }
+.fw-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); gap: 16px; }
+.fw { background: var(--surface); border: 1px solid var(--line); border-radius: var(--r); padding: 20px; display: flex; flex-direction: column; gap: 12px; min-width: 0; }
+.fw-top { display: flex; justify-content: space-between; align-items: baseline; gap: 10px; }
+.fw .what { color: var(--muted); }
+.apply { background: var(--bg); border-radius: 8px; padding: 12px 14px; display: flex; flex-direction: column; gap: 4px; }
+.apply .label { color: var(--accent); }
+.fw details summary { cursor: pointer; font-weight: 600; color: var(--accent); }
+.fw details ol { margin: 10px 0 0; padding-left: 1.2em; display: grid; gap: 6px; }
+.fw details .when { margin-top: 10px; font-size: 0.95rem; color: var(--muted); }
+.empty { padding: 28px; text-align: center; color: var(--muted); border: 1.5px dashed var(--line); border-radius: var(--r); }
+
+/* Trends */
+.trend-list { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+.trend { padding: 20px; border-radius: var(--r); background: var(--surface); border: 1px solid var(--line); display: flex; flex-direction: column; gap: 8px; min-width: 0; }
+.trend .q { font-size: 0.95rem; border-top: 1px dashed var(--line); padding-top: 10px; margin-top: auto; }
+.trend .q b { font-family: var(--f-mono); font-size: 0.74rem; letter-spacing: 0.06em; text-transform: uppercase; color: var(--signal); display: block; }
+
+/* Path */
+.path { display: grid; grid-template-columns: repeat(4, 1fr); gap: 0; counter-reset: step; }
+.step { padding: 20px; border-left: 2px solid var(--line); display: flex; flex-direction: column; gap: 8px; min-width: 0; }
+.step:first-child { border-left-color: var(--accent); }
+.step .label { color: var(--accent); }
+.step p { color: var(--muted); font-size: 0.97rem; }
+
+/* CTA band */
+.cta-band { background: var(--ink); color: var(--bg); }
+.cta-band .wrap { padding-block: 40px; display: flex; justify-content: space-between; align-items: center; gap: 20px; flex-wrap: wrap; }
+.cta-band p { opacity: 0.8; max-width: 36em; }
+.cta-band .btn { background: var(--signal); color: #1b1300; }
+
+/* Owner panel */
+.owner { background: var(--surface); border: 1.5px solid var(--accent); border-radius: 14px; padding: 22px; display: flex; flex-direction: column; gap: 16px; }
+.owner-stats { display: flex; gap: 28px; flex-wrap: wrap; }
+.owner-stats .n { font-family: var(--f-display); font-size: 2rem; font-weight: 800; font-variant-numeric: tabular-nums; }
+.table-wrap { overflow-x: auto; border: 1px solid var(--line); border-radius: 8px; }
+table { border-collapse: collapse; width: 100%; font-size: 0.93rem; }
+th, td { text-align: left; padding: 9px 12px; border-bottom: 1px solid var(--line); white-space: nowrap; }
+th { font-family: var(--f-mono); font-size: 0.72rem; letter-spacing: 0.06em; text-transform: uppercase; color: var(--muted); background: var(--bg); }
+td.num { font-variant-numeric: tabular-nums; }
+
+footer { border-top: 1px solid var(--line); }
+footer .wrap { padding-block: 24px; color: var(--muted); font-size: 0.9rem; display: flex; justify-content: space-between; gap: 12px; flex-wrap: wrap; }
+
+@media (max-width: 900px) {
+  .hero .wrap { grid-template-columns: 1fr; gap: 32px; padding-block: 36px; }
+  .brief { grid-template-columns: 1fr; }
+  .brief > div + div { border-left: 0; border-top: 1px solid var(--line); }
+  .trend-list { grid-template-columns: 1fr; }
+  .path { grid-template-columns: 1fr 1fr; }
+}
+/* ---------- Phone layout ---------- */
+.mbar { display: none; }
+.swipe-hint { display: none; }
+@media (max-width: 700px) {
+  body { font-size: 16.5px; }
+  .hero .wrap { padding-block: 28px 32px; gap: 28px; }
+  .hero-copy { gap: 16px; }
+  .hero-copy .lede { font-size: 1.08rem; }
+  .section { padding-block: 36px; }
+  .section-head { margin-bottom: 18px; }
+
+  /* Header: bigger tap targets */
+  .top .wrap { padding-block: 6px; gap: 8px; }
+  .brand .brand-name { display: none; }
+  .top nav {
+    flex: 1 1 auto; overflow-x: auto; scrollbar-width: none; gap: 2px;
+    -webkit-mask-image: linear-gradient(to right, #000 85%, transparent);
+            mask-image: linear-gradient(to right, #000 85%, transparent);
+    padding-right: 24px;
+  }
+  .top nav::-webkit-scrollbar { display: none; }
+  .top nav a { padding: 10px 10px; min-height: 44px; display: inline-flex; align-items: center; font-size: 0.95rem; }
+
+  /* Industry tabs: one swipeable row instead of a stack */
+  .tabs {
+    flex-wrap: nowrap; overflow-x: auto; scroll-snap-type: x proximity; scrollbar-width: none;
+    margin-inline: calc(-1 * max(16px, env(safe-area-inset-left, 0px))) calc(-1 * max(16px, env(safe-area-inset-right, 0px)));
+    padding-inline: max(16px, env(safe-area-inset-left, 0px)) max(16px, env(safe-area-inset-right, 0px));
+    scroll-padding-inline: max(16px, env(safe-area-inset-left, 0px));
+    padding-bottom: 4px;
+  }
+  .tabs::-webkit-scrollbar { display: none; }
+  .tab { flex: none; scroll-snap-align: start; min-height: 44px; white-space: nowrap; }
+  .brief > div { padding: 18px; }
+
+  /* Form controls: comfortable to tap, no iOS zoom */
+  .field input[type=text], .field input[type=email], .field select, .fw-tools input, .fw-tools select { font-size: 16px; min-height: 48px; }
+  .check span { padding: 10px 15px; }
+  .consent { align-items: center; }
+  .consent input { width: 22px; height: 22px; margin: 0; flex: none; }
+  .btn { min-height: 48px; }
+  .fw details summary { padding-block: 10px; }
+  .fw-tools { flex-wrap: nowrap; gap: 8px; }
+  .fw-tools input { flex: 1 1 auto; }
+  .fw-tools select { flex: none; max-width: 42%; }
+
+  /* Frameworks and trends: swipeable cards */
+  .fw-grid, .trend-list {
+    display: flex; overflow-x: auto; scroll-snap-type: x mandatory; gap: 12px; scrollbar-width: none;
+    margin-inline: calc(-1 * max(16px, env(safe-area-inset-left, 0px))) calc(-1 * max(16px, env(safe-area-inset-right, 0px)));
+    padding-inline: max(16px, env(safe-area-inset-left, 0px)) max(16px, env(safe-area-inset-right, 0px));
+    scroll-padding-inline: max(16px, env(safe-area-inset-left, 0px));
+    padding-bottom: 6px; align-items: stretch;
+  }
+  .fw-grid::-webkit-scrollbar, .trend-list::-webkit-scrollbar { display: none; }
+  .fw-grid > .fw, .trend-list > .trend { flex: 0 0 86%; scroll-snap-align: start; }
+  .fw-grid > .empty { flex: 1 0 100%; }
+  .swipe-hint { display: flex; justify-content: space-between; align-items: center; gap: 12px; margin-top: 10px; }
+  .dots { display: flex; gap: 6px; }
+  .dots i { width: 7px; height: 7px; border-radius: 50%; background: var(--line); }
+  .dots i.on { background: var(--accent); width: 18px; border-radius: 4px; }
+
+  /* Path and CTA */
+  .path { grid-template-columns: 1fr; }
+  .step { padding: 14px 16px; }
+  .cta-band .wrap { padding-block: 32px; }
+  .cta-band .btn { width: 100%; text-align: center; justify-content: center; display: flex; align-items: center; }
+
+  /* Sticky bottom bar: switch industry or register from anywhere */
+  .mbar {
+    display: flex; position: fixed; left: 0; right: 0; bottom: 0; z-index: 20; gap: 10px; align-items: center;
+    background: var(--surface); border-top: 1px solid var(--line);
+    padding: 10px max(16px, env(safe-area-inset-right, 0px)) calc(10px + env(safe-area-inset-bottom, 0px)) max(16px, env(safe-area-inset-left, 0px));
+    box-shadow: 0 -6px 20px rgba(0,0,0,.08);
+    transform: translateY(110%); transition: transform .2s ease;
+  }
+  .mbar.show { transform: none; }
+  .mbar .sel { flex: 1 1 auto; min-width: 0; display: flex; flex-direction: column; gap: 2px; }
+  .mbar .sel .label { font-size: 0.66rem; }
+  .mbar select { width: 100%; min-height: 40px; font-size: 16px; font-weight: 600; border: 1.5px solid var(--line); border-radius: 8px; background: var(--bg); padding: 6px 8px; }
+  .mbar .btn { flex: none; display: flex; align-items: center; text-decoration: none; padding-inline: 16px; }
+  body.has-mbar footer .wrap { padding-bottom: 96px; }
+}
+@media (max-width: 700px) and (prefers-reduced-motion: reduce) { .mbar { transition: none; } }
+/* ---------- First principles ---------- */
+.pr-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0 40px; }
+.pr { display: flex; flex-direction: column; gap: 10px; padding-block: 22px; border-top: 2px solid var(--ink); min-width: 0; }
+.pr h3 { font-size: 1.3rem; }
+.pr .why { color: var(--muted); }
+.pr .ask { font-family: var(--f-display); font-weight: 600; font-size: 1.08rem; padding-left: 14px; border-left: 3px solid var(--signal); }
+.pr .ask b { display: block; font-family: var(--f-mono); font-weight: 600; font-size: 0.72rem; letter-spacing: 0.07em; text-transform: uppercase; color: var(--muted); margin-bottom: 2px; }
+.pr .apply { margin-top: 2px; background: var(--surface); border: 1px solid var(--line); }
+.pr .links { display: flex; flex-wrap: wrap; gap: 6px; align-items: center; }
+.pr .links .label { margin-right: 4px; }
+.fw-link { border: 1.5px solid var(--line); background: transparent; border-radius: 999px; padding: 4px 11px; font-size: 0.88rem; font-weight: 600; color: var(--accent); cursor: pointer; }
+.fw-link:hover { border-color: var(--accent); }
+@media (max-width: 700px) {
+  .pr-grid {
+    display: flex; overflow-x: auto; scroll-snap-type: x mandatory; gap: 12px; scrollbar-width: none;
+    margin-inline: calc(-1 * max(16px, env(safe-area-inset-left, 0px))) calc(-1 * max(16px, env(safe-area-inset-right, 0px)));
+    padding-inline: max(16px, env(safe-area-inset-left, 0px)) max(16px, env(safe-area-inset-right, 0px));
+    scroll-padding-inline: max(16px, env(safe-area-inset-left, 0px));
+    padding-bottom: 6px; align-items: stretch;
+  }
+  .pr-grid::-webkit-scrollbar { display: none; }
+  .pr { flex: 0 0 86%; scroll-snap-align: start; background: var(--surface); border: 1px solid var(--line); border-top: 3px solid var(--ink); border-radius: var(--r); padding: 18px; }
+  .pr .apply { background: var(--bg); border: 0; }
+  .fw-link { min-height: 36px; padding: 6px 12px; }
+  .top nav a[href="#join"] { display: none; }
+}
+@media (prefers-reduced-motion: no-preference) {
+  .fw, .trend { transition: border-color .15s ease; }
+  .fw:hover, .trend:hover { border-color: var(--accent); }
+}
+</style>
+<style>body{margin:0}[hidden]{display:none!important}img{max-width:100%}</style>
+</head>
+<body>
+
+<header class="top">
+  <div class="wrap">
+    <a class="brand" href="#top" id="brandLink" aria-label="PM Field Guide, back to top">
+      <svg width="28" height="28" viewBox="0 0 28 28" aria-hidden="true"><rect x="1" y="1" width="26" height="26" rx="6" fill="var(--accent)"/><path d="M8 19 L13 9 L16 15 L20 11" stroke="var(--accent-ink)" stroke-width="2.4" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      <span class="brand-name">PM Field Guide</span>
+    </a>
+    <nav aria-label="Sections">
+      <a href="#industries">Industries</a>
+      <a href="#principles">Principles</a>
+      <a href="#frameworks">Frameworks</a>
+      <a href="#trends">Trends</a>
+      <a href="#join" class="nav-join">Join</a>
+    </nav>
+  </div>
+</header>
+
+<section class="hero" id="top">
+  <div class="wrap">
+    <div class="hero-copy">
+      <span class="label">For aspiring product managers</span>
+      <h1>Learn product frameworks the way your industry uses them.</h1>
+      <p class="lede">A RICE score in a pharma company weighs regulatory risk. A North Star in telecom is not the same as one in retail. Pick your domain and every framework here re-explains itself for it.</p>
+      <ul class="hero-points">
+        <li>Eight product first principles that every framework is built on</li>
+        <li>Eight core frameworks, each with a worked example for six industries</li>
+        <li>Domain briefs: regulators, metrics and vocabulary you'll hear in interviews</li>
+        <li>A trend digest for the industries you choose, sent to registered members</li>
+      </ul>
+    </div>
+
+    <div class="signup" id="join">
+      <div id="signupForm">
+        <form id="regForm" name="registration" method="POST" action="https://formspree.io/f/xgakoknd" novalidate style="display:flex;flex-direction:column;gap:16px">
+          <input type="hidden" name="industries" id="regIndustriesField" value="">
+          <p hidden><label>Leave this empty <input name="company" id="regHoney" tabindex="-1" autocomplete="off"></label></p>
+          <div>
+            <span class="label">Free membership</span>
+            <h3>Get the trend digest for your industry</h3>
+          </div>
+          <div class="field">
+            <label for="regName">Your name</label>
+            <input type="text" id="regName" name="name" autocomplete="name" required maxlength="80">
+          </div>
+          <div class="field">
+            <label for="regEmail">Email</label>
+            <input type="email" id="regEmail" name="email" autocomplete="email" required maxlength="120">
+          </div>
+          <div class="field">
+            <label for="regStage">Where are you today?</label>
+            <select id="regStage" name="stage" required>
+              <option value="">Choose one</option>
+              <option value="student">Student or fresh graduate</option>
+              <option value="switching">Switching into product from another role</option>
+              <option value="apm">APM or first-year PM</option>
+              <option value="pm">Working PM, changing industry</option>
+            </select>
+          </div>
+          <div class="field">
+            <span class="flabel" id="regIndLabel">Industries to follow</span>
+            <div class="checks" id="regIndustries" role="group" aria-labelledby="regIndLabel"></div>
+          </div>
+          <label class="consent" for="regConsent">
+            <input type="checkbox" id="regConsent" name="consent" required>
+            <span>Email me the trend digest. I can unsubscribe at any time.</span>
+          </label>
+          <button class="btn" type="submit" id="regSubmit">Register for free</button>
+          <p class="form-msg" id="regMsg" role="status" aria-live="polite"></p>
+        </form>
+      </div>
+      <div class="done" id="signupDone" hidden>
+        <div class="tick" aria-hidden="true">✓</div>
+        <h3 id="doneTitle">You're registered</h3>
+        <p id="doneText">We'll send trend updates for the industries you picked.</p>
+        <button class="btn ghost" type="button" id="editReg">Update my details</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="industries">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="label">Step 1 · Choose a domain</span>
+      <h2>Every industry bends the same frameworks differently</h2>
+      <p>Choose the industry you're aiming for. The brief, the framework examples and the trends below all switch to match.</p>
+    </div>
+    <div class="tabs" role="tablist" id="industryTabs" aria-label="Industry"></div>
+    <div class="brief" id="brief"></div>
+  </div>
+</section>
+
+<section class="section" id="principles">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="label">Step 2 · Think from first principles</span>
+      <h2>Eight product first principles, seen through <span id="prIndustryName">Retail</span></h2>
+      <p>Frameworks change with fashion. These ideas don't. Every framework on this page puts one or more of them into practice. Learn them first and you'll know which framework to reach for, and when to drop one.</p>
+    </div>
+    <div class="pr-grid" id="prGrid"></div>
+    <div class="swipe-hint"><span class="label" id="prHint">Swipe for more</span><span class="dots" id="prDots" aria-hidden="true"></span></div>
+  </div>
+</section>
+
+<section class="section" id="frameworks">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="label">Step 3 · Learn the toolkit</span>
+      <h2>Core frameworks, applied to <span id="fwIndustryName">Retail</span></h2>
+      <p>Each card shows what the framework is for, then a worked example from the industry you picked. Open "How to run it" for the steps.</p>
+    </div>
+    <div class="fw-tools">
+      <input type="search" id="fwSearch" placeholder="Search frameworks, e.g. prioritisation, metrics" aria-label="Search frameworks">
+      <select id="fwStage" aria-label="Filter by product stage">
+        <option value="all">All stages</option>
+        <option value="Discover">Discover</option>
+        <option value="Prioritise">Prioritise</option>
+        <option value="Measure">Measure</option>
+        <option value="Strategy">Strategy</option>
+      </select>
+    </div>
+    <div class="fw-grid" id="fwGrid"></div>
+    <div class="swipe-hint"><span class="label" id="fwHint">Swipe for more</span><span class="dots" id="fwDots" aria-hidden="true"></span></div>
+  </div>
+</section>
+
+<section class="section" id="trends">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="label">Step 4 · Stay current</span>
+      <h2>What product teams in <span id="trendIndustryName">Retail</span> are working on</h2>
+      <p>Three shifts shaping product roadmaps in this industry, each with a question you could be asked in an interview. Registered members get updates on these by email.</p>
+    </div>
+    <div class="trend-list" id="trendList"></div>
+    <div class="swipe-hint"><span class="label" id="trendHint">Swipe for more</span><span class="dots" id="trendDots" aria-hidden="true"></span></div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="label">Your route in</span>
+      <h2>A four-stage path into a domain PM role</h2>
+    </div>
+    <div class="path">
+      <div class="step"><span class="label">Stage 1</span><h3>Learn the domain</h3><p>Read the industry brief. Learn the regulators, the money flow and who the real customer is. In pharma, the prescriber and the payer are often not the patient.</p></div>
+      <div class="step"><span class="label">Stage 2</span><h3>Practise the toolkit</h3><p>Learn the first principles, then run each framework on a real product from your chosen industry. Write one page per framework, using the worked examples as a model.</p></div>
+      <div class="step"><span class="label">Stage 3</span><h3>Build a case study</h3><p>Pick one problem, for example drop-off at UPI checkout. Take it from discovery through to a metric you'd track. This becomes your portfolio piece.</p></div>
+      <div class="step"><span class="label">Stage 4</span><h3>Speak the language</h3><p>Use the trend questions for interview practice. Being able to discuss DSCSA, FHIR or network slicing sets domain candidates apart.</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="cta-band">
+  <div class="wrap">
+    <div style="display:flex;flex-direction:column;gap:6px">
+      <h2 style="font-size:1.6rem">Follow the industries you're aiming for</h2>
+      <p>Register once and choose your domains. You'll get trend updates and new framework examples for those industries.</p>
+    </div>
+    <a class="btn" href="#join" id="ctaJoin" style="text-decoration:none">Register for free</a>
+  </div>
+</section>
+
+
+<div class="mbar" id="mbar" aria-label="Quick actions">
+  <div class="sel"><label class="label" for="mbarInd">Viewing industry</label><select id="mbarInd"></select></div>
+  <a class="btn" href="#join" id="mbarJoin">Register</a>
+</div>
+
+<footer>
+  <div class="wrap">
+    <span>PM Field Guide · Frameworks for aspiring product managers</span>
+    <span>We use your email only to send the digest you asked for.</span>
+  </div>
+</footer>
+
+<script>
+const INDUSTRIES = [
+  { id: "retail", name: "Retail & E-commerce", short: "Retail", code: "RTL",
+    intro: "Thin margins, high volume, and a customer who can leave in one tap. Product work lives in the funnel, the basket and the supply chain behind them.",
+    customer: "Shoppers, plus sellers on marketplaces and store staff using internal tools.",
+    regs: ["Consumer protection rules", "DPDP Act (India) / GDPR", "PCI DSS", "E-commerce marketplace rules"],
+    metrics: ["Conversion rate", "AOV", "GMV", "Repeat purchase rate", "Return rate", "Inventory turns", "CAC : LTV"],
+    trends: [
+      { t: "Retail media networks", d: "Retailers sell ad space on their own sites and apps using first-party shopper data. That adds an advertiser-facing product next to the shopper one.", q: "How would you stop sponsored listings from hurting search relevance and conversion?" },
+      { t: "AI shopping assistants", d: "Conversational search and agents that compare and buy for the shopper are changing how product discovery works.", q: "If an AI agent shops on the customer's behalf, what does your product page need to provide?" },
+      { t: "Unified commerce and quick commerce", d: "One inventory and customer view across store, app and 10-minute delivery. Dark stores make stock accuracy a product problem.", q: "Which metric would you watch to know whether quick delivery is cannibalising larger baskets?" } ] },
+  { id: "pharma", name: "Pharma & Life Sciences", short: "Pharma", code: "PHA",
+    intro: "Products serve doctors, patients, regulators and field teams at once. Validation and compliance shape the roadmap as much as user needs do.",
+    customer: "Healthcare professionals (HCPs), patients, medical reps, and clinical and regulatory teams.",
+    regs: ["FDA 21 CFR Part 11", "GxP / GCP", "CDSCO (India)", "EMA", "DSCSA serialisation", "Pharmacovigilance"],
+    metrics: ["Trial enrolment rate", "Time to first patient", "HCP engagement", "Patient adherence", "Adverse event reporting time", "Cycle time to submission"],
+    trends: [
+      { t: "AI in drug discovery and trials", d: "Models help pick targets, design molecules and match patients to trials. Product teams build the tools scientists actually use.", q: "How would you earn a scientist's trust in an AI-ranked candidate list?" },
+      { t: "Decentralised clinical trials", d: "eConsent, home visits and wearables move parts of a trial out of the site, so patient experience becomes a design surface.", q: "What would you measure to show a decentralised trial is improving patient retention?" },
+      { t: "Omnichannel HCP engagement", d: "Field reps, email, webinars and portals are being orchestrated with next-best-action models instead of fixed call plans.", q: "How do you personalise content for doctors while staying inside promotional compliance?" } ] },
+  { id: "health", name: "Health Sciences & MedTech", short: "Health", code: "HLT",
+    intro: "Clinical safety comes first, and the buyer, the user and the payer are usually three different people. Interoperability is a requirement, not a feature.",
+    customer: "Clinicians, patients, hospital administrators and payers or insurers.",
+    regs: ["HIPAA", "ABDM (India)", "FDA SaMD guidance", "EU MDR", "ISO 13485 / IEC 62304", "HL7 FHIR"],
+    metrics: ["Clinician time saved", "Readmission rate", "Patient activation", "Time to diagnosis", "Device uptime", "Claims denial rate"],
+    trends: [
+      { t: "Interoperability on FHIR", d: "Health records move between systems through standard APIs. In India, ABDM's ABHA IDs link records across providers.", q: "How would you design consent so patients understand who can see their records?" },
+      { t: "Remote patient monitoring", d: "Connected devices and virtual wards manage chronic conditions at home. The hard part is alert fatigue for care teams.", q: "How do you decide which readings should alert a nurse and which should not?" },
+      { t: "AI as a medical device", d: "Diagnostic and triage algorithms are regulated as software medical devices, with rules for how models can change after approval.", q: "How would you ship model improvements under a predetermined change control plan?" } ] },
+  { id: "telecom", name: "Telecom & Connectivity", short: "Telecom", code: "TEL",
+    intro: "Huge subscriber bases, expensive infrastructure and flat consumer pricing. Product teams look for new revenue from the network itself.",
+    customer: "Consumer subscribers, enterprises, and developers or partners using network APIs.",
+    regs: ["TRAI (India)", "FCC", "Spectrum licensing", "Lawful intercept", "Number portability", "DND / TCCCPR"],
+    metrics: ["ARPU", "Churn", "Net adds", "NPS", "Data usage per sub", "Network availability", "Cost per GB"],
+    trends: [
+      { t: "5G standalone and network slicing", d: "Operators can sell guaranteed network quality for specific uses such as broadcast, factories or gaming.", q: "How would you price and package a network slice for a stadium event?" },
+      { t: "Network APIs (CAMARA, GSMA Open Gateway)", d: "Operators expose capabilities like SIM-swap checks and location to developers through standard APIs.", q: "Who is your first customer for a SIM-swap fraud API, and how do you prove value?" },
+      { t: "AI for customer care and network operations", d: "Self-healing networks and AI agents for care calls aim to cut cost per subscriber.", q: "What is the trade-off between deflecting care calls and keeping churn low?" } ] },
+  { id: "fintech", name: "Fintech & Banking", short: "Fintech", code: "FIN",
+    intro: "Trust is the product. Every feature balances conversion against fraud, credit risk and regulatory scrutiny.",
+    customer: "Retail customers, merchants, small businesses, and partner banks or NBFCs.",
+    regs: ["RBI guidelines", "KYC / AML", "PCI DSS", "Digital lending rules", "PSD2 / open banking", "SEBI"],
+    metrics: ["Activation rate", "TPV", "Fraud loss rate", "Approval rate", "NPA / default rate", "Cost per transaction"],
+    trends: [
+      { t: "Real-time payments everywhere", d: "UPI's success is being followed by FedNow, Pix and cross-border links. Credit on UPI turns payments into lending.", q: "How would you design credit on UPI so it is useful without encouraging over-borrowing?" },
+      { t: "Embedded finance", d: "Loans, insurance and payments built into non-financial apps such as marketplaces, travel and B2B software.", q: "What does the partner platform need from your API to offer credit at checkout?" },
+      { t: "Account aggregation and open finance", d: "Consent-based data sharing (India's Account Aggregator framework, open banking elsewhere) powers underwriting and advice.", q: "How do you make a data-sharing consent screen both compliant and easy to accept?" } ] },
+  { id: "saas", name: "B2B SaaS & Enterprise", short: "SaaS", code: "SAS",
+    intro: "The buyer, admin and end user are different people, and revenue comes from renewals. Product decisions trade new features against reliability and sales asks.",
+    customer: "Economic buyers, admins, end users and implementation partners.",
+    regs: ["SOC 2", "ISO 27001", "GDPR / DPDP", "Data residency", "EU AI Act"],
+    metrics: ["ARR", "Net revenue retention", "Logo churn", "Time to value", "Seat activation", "Expansion rate"],
+    trends: [
+      { t: "AI agents inside workflows", d: "Products are moving from copilots that suggest to agents that complete tasks, which raises questions of control and audit.", q: "What guardrails would an admin need before letting an agent act on their data?" },
+      { t: "Usage-based pricing", d: "Pricing tied to consumption, such as credits, tasks or API calls, changes how you think about activation and forecasting.", q: "How would you warn customers before an unexpected bill without hurting usage?" },
+      { t: "Product-led sales", d: "Self-serve signups feed sales teams through product-qualified leads.", q: "Which in-product signals would you use to define a product-qualified lead?" } ] }
+];
+
+const FRAMEWORKS = [
+  { id: "jtbd", name: "Jobs to Be Done", stage: "Discover",
+    what: "Understand the progress a customer is trying to make, rather than the features they ask for.",
+    when: "Use it early, before you commit to a solution, or when customers keep asking for features that don't fix the problem.",
+    steps: ["Interview recent buyers or switchers about the moment they decided", "Write the job as: When [situation], I want to [motivation], so I can [outcome]", "Map what else they 'hire' for the job today, including workarounds", "Rank jobs by how important they are and how poorly they're served"],
+    ex: {
+      retail: "When I'm restocking groceries on a weekday evening, I want to repeat last week's basket in two taps, so I can get dinner started. This points to a 'reorder' feature, not better search.",
+      pharma: "When I see a patient whose diabetes isn't controlled, a GP wants to quickly check whether a newer therapy is covered, so they can prescribe without a callback. Coverage lookup matters more than brochure content.",
+      health: "When I'm discharging a cardiac patient, a nurse wants to set up home monitoring before the patient leaves, so readmission risk is covered. Setup time at discharge is the real constraint.",
+      telecom: "When my data runs out while travelling, I want a top-up that works without Wi-Fi, so I can stay reachable. That suggests USSD or SMS top-up, not an app-only flow.",
+      fintech: "When a supplier invoice is due before my customer pays, a shop owner wants short-term credit in minutes, so the business keeps running. Speed of approval beats a lower interest rate.",
+      saas: "When a new hire joins, an IT admin wants all their tool access ready on day one, so onboarding isn't blocked. The job is provisioning, not 'user management'."
+    } },
+  { id: "ost", name: "Opportunity Solution Tree", stage: "Discover",
+    what: "Connect one desired outcome to customer opportunities, candidate solutions and the experiments that test them.",
+    when: "Use it to keep discovery tied to a measurable outcome and to compare several solutions instead of falling for the first idea.",
+    steps: ["Set one outcome the team can influence", "Fill the next level with opportunities: needs and pain points heard in research", "Generate at least three solutions per priority opportunity", "Attach small assumption tests to each solution before building"],
+    ex: {
+      retail: "Outcome: lift repeat purchase in 30 days. Opportunity: 'I forget what I bought last time'. Solutions: reorder list, refill reminders, subscription. Test: a fake-door 'Buy again' button.",
+      pharma: "Outcome: raise trial enrolment at sites. Opportunity: 'Screening patients takes coordinators hours'. Solutions: EHR-based pre-screening, eligibility checklist app, site referral network.",
+      health: "Outcome: cut no-shows for follow-ups. Opportunity: 'Patients can't take time off work'. Solutions: evening tele-visits, SMS rescheduling, pharmacy check-ins.",
+      telecom: "Outcome: reduce churn in the prepaid base. Opportunity: 'I switched because the other network had better offers'. Solutions: personalised recharge offers, loyalty data rollover, a win-back flow at port-out request.",
+      fintech: "Outcome: raise KYC completion. Opportunity: 'Video KYC fails on my weak network'. Solutions: low-bandwidth mode, scheduled callbacks, DigiLocker document fetch.",
+      saas: "Outcome: shorten time to first value. Opportunity: 'I don't know which integration to set up first'. Solutions: role-based templates, guided setup, sample data workspace."
+    } },
+  { id: "rice", name: "RICE Scoring", stage: "Prioritise",
+    what: "Rank ideas by Reach × Impact × Confidence ÷ Effort to compare them on one scale.",
+    when: "Use it when you have a long backlog and need a defensible, shared way to compare items of different sizes.",
+    steps: ["Reach: how many people or events in a set period", "Impact: 3 massive, 2 high, 1 medium, 0.5 low, 0.25 minimal", "Confidence: 100%, 80% or 50% based on evidence", "Effort: person-months; divide and rank, then sanity-check the top of the list"],
+    ex: {
+      retail: "Saved-cart reminder: reach 40,000 abandoners a month × impact 1 × 80% ÷ 1 person-month = 32,000. Visual search: 5,000 × 2 × 50% ÷ 4 = 1,250. Ship the reminder first.",
+      pharma: "Add a regulatory-risk factor. A field-rep app feature with high RICE that needs fresh medical-legal review may slip behind a lower-scoring change that's already approved.",
+      health: "Weight Impact by clinical safety, not just engagement. A medication-reconciliation fix reaching fewer users can outrank a portal redesign.",
+      telecom: "Reach is huge for anything on the main app, so effort and confidence decide. A recharge flow tweak for 20M users beats a new 5G feature for early adopters.",
+      fintech: "Score fraud and compliance work separately. A must-do RBI change is not ranked; it's a constraint. Use RICE for what's left.",
+      saas: "Reach can mean accounts rather than users. A feature that unblocks five large renewals may outrank one used by thousands of free users."
+    } },
+  { id: "kano", name: "Kano Model", stage: "Prioritise",
+    what: "Sort features into basics customers expect, performance features they want more of, and delighters they didn't ask for.",
+    when: "Use it to balance a release so you're not only shipping basics, or chasing delight while the basics are broken.",
+    steps: ["List candidate features", "Ask users two questions each: how they'd feel if it existed, and if it didn't", "Classify answers as must-be, performance, attractive, indifferent or reverse", "Fix gaps in must-be first, then invest in performance and a few attractive features"],
+    ex: {
+      retail: "Must-be: accurate delivery dates. Performance: faster delivery. Delighter: free gift-wrapping suggested before a birthday saved in the profile.",
+      pharma: "Must-be for HCP portals: approved, compliant content. Performance: fast sample requests. Delighter: summaries of new trial data for their specialty.",
+      health: "Must-be: correct records and secure login. Performance: shorter waits for appointments. Delighter: a plain-language summary of a lab report.",
+      telecom: "Must-be: reliable calls and data. Performance: speed and coverage. Delighter: automatic international roaming pack when you land abroad.",
+      fintech: "Must-be: instant payment confirmation. Performance: higher limits and lower fees. Delighter: a nudge before an auto-debit would bounce.",
+      saas: "Must-be: SSO and audit logs for enterprise buyers. Performance: speed and integrations. Delighter: a weekly summary that writes itself."
+    } },
+  { id: "northstar", name: "North Star Metric", stage: "Strategy",
+    what: "One metric that captures the value customers get, plus the input metrics that drive it.",
+    when: "Use it to align teams on long-term value rather than vanity numbers like downloads or page views.",
+    steps: ["Describe the core value customers get", "Choose a metric that measures that value being delivered", "Break it into 3 to 5 input metrics teams can move", "Check it can't be gamed in a way that hurts customers"],
+    ex: {
+      retail: "North Star: orders delivered on time and not returned, per week. Inputs: new buyers, repeat rate, in-stock rate, delivery accuracy.",
+      pharma: "North Star for a patient-support programme: patients still on therapy at 6 months. Inputs: enrolment, first-fill rate, refill reminders acted on.",
+      health: "North Star for a virtual ward: patient-days managed safely at home. Inputs: referrals, devices active, alerts resolved in time.",
+      telecom: "North Star: active subscribers using data weekly. Inputs: activation within 24 hours, recharge rate, network quality score.",
+      fintech: "North Star: monthly transacting users. Inputs: KYC completion, first transaction, repeat transactions, failed-payment rate.",
+      saas: "North Star: weekly active teams completing the core workflow. Inputs: seats invited, integrations connected, workflows run."
+    } },
+  { id: "heart", name: "HEART Metrics", stage: "Measure",
+    what: "Google's user-experience scorecard: Happiness, Engagement, Adoption, Retention, Task success, each tied to goals, signals and metrics.",
+    when: "Use it to define success for a feature or redesign before launch, so you know what to measure.",
+    steps: ["Pick the dimensions that matter for this feature (rarely all five)", "Set a goal for each in plain words", "Name the signal that would show progress", "Turn signals into metrics you can track over time"],
+    ex: {
+      retail: "Task success for checkout: % of sessions completing payment without an error. Happiness: post-order rating.",
+      pharma: "Adoption for a rep app: % of reps logging calls in-app within 4 weeks. Task success: time to file an adverse-event report.",
+      health: "Task success for a clinician tool: time to complete a discharge summary. Happiness: clinician satisfaction survey each quarter.",
+      telecom: "Retention for the self-care app: monthly returning users. Task success: % of SIM swaps finished without a store visit.",
+      fintech: "Task success for onboarding: % finishing KYC on the first attempt. Happiness: CSAT after a dispute is resolved.",
+      saas: "Adoption of a new reporting module: % of accounts creating a report in 30 days. Engagement: reports viewed per user per week."
+    } },
+  { id: "aarrr", name: "AARRR Pirate Metrics", stage: "Measure",
+    what: "Track the customer lifecycle as Acquisition, Activation, Retention, Referral and Revenue to find where people drop off.",
+    when: "Use it to diagnose a growth problem and decide which stage of the funnel to work on.",
+    steps: ["Define each stage as a clear event for your product", "Measure conversion between stages for recent cohorts", "Find the stage with the biggest drop or most room to improve", "Run experiments on that stage only"],
+    ex: {
+      retail: "Activation = first order delivered. A drop between install and first order often points to delivery-slot availability, not app design.",
+      pharma: "Adapt it for a patient app: Acquisition by HCP referral, Activation = first dose logged, Retention = adherence. Referral is usually not appropriate here.",
+      health: "Activation for a telehealth service = first consult completed. Retention = second consult or follow-up within 90 days.",
+      telecom: "Activation = first recharge after the SIM is issued. Referral programmes such as family plans drive acquisition at low cost.",
+      fintech: "Activation = first successful transaction after KYC. Revenue often comes late, through credit or merchant fees, so track contribution per cohort.",
+      saas: "Activation = the 'aha' moment, for example first automated workflow run. Referral includes users inviting colleagues."
+    } },
+  { id: "leancanvas", name: "Lean Canvas", stage: "Strategy",
+    what: "A one-page business model covering problem, customer segments, value proposition, solution, channels, revenue, costs, metrics and unfair advantage.",
+    when: "Use it to test a new product idea or pitch, and to spot the riskiest assumption before building.",
+    steps: ["Start with the problem and customer segments", "Write a one-line value proposition", "Fill revenue, costs and channels honestly", "Circle the riskiest box and design a test for it"],
+    ex: {
+      retail: "Idea: refill subscription for home essentials. Riskiest box: channels. Can you acquire subscribers below the margin you'll earn in six months?",
+      pharma: "Idea: a digital companion app for a therapy. Riskiest box: revenue. Who pays: the brand team, the payer or the patient?",
+      health: "Idea: AI triage for rural clinics. Riskiest box: unfair advantage and regulation. Can you get clinical validation and approval as a medical device?",
+      telecom: "Idea: a network-quality API for gaming companies. Riskiest box: customer segments. Will developers integrate operator by operator?",
+      fintech: "Idea: invoice financing for small suppliers. Riskiest box: cost structure. Default rates decide whether the model works.",
+      saas: "Idea: compliance automation for small clinics. Riskiest box: channels. Can you reach many small buyers without an expensive sales team?"
+    } }
+];
+
+const PRINCIPLES = [
+ {
+  "id": "problem",
+  "title": "Start from the problem, not the feature",
+  "why": "Customers don't want features. They want some situation in their life or work to get better. A feature that doesn't change that situation gets ignored, however well it is built.",
+  "ask": "Can I describe the problem without mentioning my solution?",
+  "fw": [
+   "Jobs to Be Done",
+   "Opportunity Solution Tree"
+  ],
+  "ex": {
+   "retail": "Shoppers don't want more filters. They can't tell whether a kurta will fit. Size guidance built from past returns fixes the real problem; more filters don't.",
+   "pharma": "Doctors don't want another portal. They lack time to check insurance coverage before prescribing. Put the coverage check where they already work.",
+   "health": "Nurses don't want a new dashboard. They miss patients getting worse between rounds. The problem is timely escalation, not how data is displayed.",
+   "telecom": "Subscribers don't want a richer app. They want to know why their data ran out so fast. Clear usage breakdowns address the complaint behind many churn calls.",
+   "fintech": "Shop owners don't want a lending app. They have a cash gap between paying suppliers and getting paid. Credit offered at that moment is the product.",
+   "saas": "Admins don't want more settings. They worry a wrong permission will leak data. Safe defaults and a regular access review solve that worry."
+  }
+ },
+ {
+  "id": "who",
+  "title": "Know the user, the buyer and the payer",
+  "why": "In many industries the person who uses a product, the person who chooses it and the person who pays for it are different people. A product that pleases only one of them stalls.",
+  "ask": "Who uses it, who decides, who pays, and what does each one need before they say yes?",
+  "fw": [
+   "Lean Canvas",
+   "Jobs to Be Done"
+  ],
+  "ex": {
+   "retail": "On a marketplace, shoppers use it, sellers pay commission and brands buy ads. A change to search ranking affects all three.",
+   "pharma": "The patient takes the medicine, the doctor prescribes it, and an insurer or government scheme pays. Each needs different evidence.",
+   "health": "Clinicians use the hospital system, the CIO buys it and payers decide what is reimbursed. Clinicians liking it doesn't guarantee renewal.",
+   "telecom": "In enterprise IoT, the device maker fits the SIM, the enterprise pays, and field technicians use the app every day.",
+   "fintech": "In embedded lending, the borrower uses it, the platform offers it, and the bank or NBFC carries the risk and sets the rules.",
+   "saas": "End users judge the daily experience, admins judge control and security, and finance judges the price at renewal."
+  }
+ },
+ {
+  "id": "switch",
+  "title": "Value has to beat the cost of switching",
+  "why": "People already solve their problem somehow, even if badly. A new product must be clearly better than the current way once you count the effort, risk and habit involved in changing.",
+  "ask": "What do people do today, and why would they bother to change?",
+  "fw": [
+   "Kano Model",
+   "Jobs to Be Done"
+  ],
+  "ex": {
+   "retail": "Shoppers already have a favourite grocery app. Ten-minute delivery wins only if the speed is worth more to them than slightly higher prices.",
+   "pharma": "A digital adherence app competes with a pill box and a family member's reminder. It has to be simpler than both.",
+   "health": "Clinicians know their record system by heart. A tool that adds even two clicks per patient will be resisted.",
+   "telecom": "Number portability made switching networks easy, yet most people don't switch unless coverage or price is clearly worse.",
+   "fintech": "UPI made bank transfers free and instant. A new payments product must offer something UPI doesn't, such as credit or rewards.",
+   "saas": "Moving off spreadsheets means cleaning data and retraining people. An importer and a quick first win lower that cost."
+  }
+ },
+ {
+  "id": "outcomes",
+  "title": "Measure outcomes, not output",
+  "why": "Shipping a feature is output. A change in what customers do, or in business results, is the outcome. A team can ship every sprint and still fail if it only counts releases.",
+  "ask": "If this ships, what will customers do differently, and how will we know?",
+  "fw": [
+   "North Star Metric",
+   "HEART Metrics",
+   "Opportunity Solution Tree"
+  ],
+  "ex": {
+   "retail": "Not “launched a wishlist” but “people who use the wishlist buy again sooner”.",
+   "pharma": "Not “released the HCP portal v2” but “doctors get samples in minutes instead of days”.",
+   "health": "Not “deployed remote monitoring” but “fewer heart-failure patients are readmitted within 30 days”.",
+   "telecom": "Not “the new recharge page is live” but “fewer recharges fail per 1,000 attempts”.",
+   "fintech": "Not “video KYC launched” but “more applicants finish KYC on the first try”.",
+   "saas": "Not “shipped 12 integrations” but “accounts that connect an integration renew more often”."
+  }
+ },
+ {
+  "id": "bets",
+  "title": "Every plan is a bet, so test the riskiest part first",
+  "why": "A roadmap rests on assumptions: that people want it, can use it, that it can be built and that it makes business sense. The cheapest time to find a wrong assumption is before you build.",
+  "ask": "What must be true for this to work, and which of those am I least sure about?",
+  "fw": [
+   "Lean Canvas",
+   "Opportunity Solution Tree"
+  ],
+  "ex": {
+   "retail": "Before building a subscription service, check with a simple sign-up page whether customers will accept a fixed delivery day.",
+   "pharma": "Before building a patient app, ask the medical, legal and regulatory teams whether its claims need approval. That is often the biggest risk.",
+   "health": "Before scaling an AI triage tool, check its accuracy on local patient data. A model trained elsewhere may not hold up.",
+   "telecom": "Before launching a network API, sign a few paying pilot customers to prove developers will pay per call.",
+   "fintech": "Before scaling a credit line, lend to a small group and watch real default rates. Losses show up months after launch.",
+   "saas": "Before building an AI agent, check whether admins will let it change their data. Trust, not technology, is often the blocker."
+  }
+ },
+ {
+  "id": "constraints",
+  "title": "Constraints define what you can build",
+  "why": "Regulation, unit economics, technology and operations set limits every product must live within. Learning them early stops you designing something that can't ship or can't make money.",
+  "ask": "What can't we change, and which limit hurts most?",
+  "fw": [
+   "RICE Scoring",
+   "Lean Canvas"
+  ],
+  "ex": {
+   "retail": "With thin margins, a feature that adds a few rupees of delivery cost per order can wipe out the profit on it.",
+   "pharma": "Promotional rules mean you can't freely A/B test claims about a medicine. Content needs approval first.",
+   "health": "Patient data rules (HIPAA, India's DPDP Act, ABDM consent) decide what data you can use and how you must ask for it.",
+   "telecom": "Spectrum and network capacity are fixed in the short term. A feature that spikes peak-hour traffic can slow the network for everyone.",
+   "fintech": "RBI's digital lending rules set who holds the money, how fees are shown and who may contact borrowers.",
+   "saas": "Enterprise security reviews (SOC 2, data residency) can block a sale, however good the product is."
+  }
+ },
+ {
+  "id": "distribution",
+  "title": "Distribution is part of the product",
+  "why": "A good product that people never hear about, or can't easily get, still fails. How the product reaches people needs designing alongside the product itself.",
+  "ask": "How will the right people find it, try it and keep using it?",
+  "fw": [
+   "AARRR Pirate Metrics"
+  ],
+  "ex": {
+   "retail": "Where a feature sits in search results and on the home page decides its adoption more than how good it is.",
+   "pharma": "Medical reps, conferences and clinical guidelines are the main ways to reach doctors. A product needs a place in those channels.",
+   "health": "Hospital adoption usually depends on fitting into the existing record system and on clinicians who champion it.",
+   "telecom": "Retail stores, distributors and the recharge flow reach the most users. An offer inside the recharge flow beats a separate campaign.",
+   "fintech": "Partnering with apps people already use (marketplaces, payroll, accounting) often works better than acquiring users directly.",
+   "saas": "Free trials, templates and users inviting colleagues spread a product inside a company."
+  }
+ },
+ {
+  "id": "reversible",
+  "title": "Decide quickly when you can undo it, carefully when you can't",
+  "why": "Some decisions are easy to undo, like a button label. Others are hard, like pricing, data models or a regulatory filing. Match your speed and rigour to how reversible the choice is.",
+  "ask": "If this turns out wrong, how hard is it to undo?",
+  "fw": [
+   "RICE Scoring"
+  ],
+  "ex": {
+   "retail": "Test home page layouts freely. Think hard before changing the returns policy, because shoppers and sellers both react.",
+   "pharma": "Iterate freely on internal tools. Changing a trial protocol or a regulatory submission is slow and expensive.",
+   "health": "Interface tweaks can ship fast. Changes to clinical decision logic need validation and possibly regulatory review.",
+   "telecom": "Offer tests are easy to roll back. Tariff changes affect millions of people and may need notice to the regulator.",
+   "fintech": "Onboarding copy can change daily. Interest rates and fees affect trust and must follow disclosure rules.",
+   "saas": "Interface changes are reversible. Price changes and retiring an API break customer trust and integrations."
+  }
+ }
+];
+
+const STAGE_LABELS = { student: "Student or graduate", switching: "Switching into product", apm: "APM or first-year PM", pm: "Working PM, changing industry" };
+
+const store = {
+  get(k) { try { return localStorage.getItem(k); } catch (e) { return null; } },
+  set(k, v) { try { localStorage.setItem(k, v); } catch (e) {} }
+};
+
+let current = INDUSTRIES.find(i => i.id === store.get("pmfg-industry")) || INDUSTRIES[0];
+
+function el(tag, attrs, children) {
+  const n = document.createElement(tag);
+  if (attrs) for (const [k, v] of Object.entries(attrs)) {
+    if (k === "class") n.className = v; else if (k === "text") n.textContent = v; else n.setAttribute(k, v);
+  }
+  (children || []).forEach(c => n.append(c));
+  return n;
+}
+
+function renderTabs() {
+  const box = document.getElementById("industryTabs");
+  box.replaceChildren(...INDUSTRIES.map(ind => {
+    const b = el("button", { class: "tab", role: "tab", type: "button", id: "tab-" + ind.id, "aria-selected": String(ind.id === current.id) }, [
+      el("span", { class: "code", text: ind.code }), el("span", { text: ind.name })
+    ]);
+    b.addEventListener("click", () => selectIndustry(ind.id));
+    return b;
+  }));
+}
+
+function renderBrief() {
+  const i = current;
+  const brief = document.getElementById("brief");
+  brief.replaceChildren(
+    el("div", { class: "intro" }, [el("span", { class: "label", text: i.code + " · Domain brief" }), el("h3", { text: i.name }), el("p", { text: i.intro }), el("p", {}, [el("strong", { text: "Who you build for: " }), i.customer])]),
+    el("div", {}, [el("span", { class: "label", text: "Rules you'll work within" }), el("div", { class: "chips" }, i.regs.map(r => el("span", { class: "chip reg", text: r })))]),
+    el("div", {}, [el("span", { class: "label", text: "Metrics you'll be asked about" }), el("div", { class: "chips" }, i.metrics.map(m => el("span", { class: "chip", text: m })))])
+  );
+}
+
+function renderFrameworks() {
+  document.getElementById("fwIndustryName").textContent = current.short;
+  const q = document.getElementById("fwSearch").value.trim().toLowerCase();
+  const stage = document.getElementById("fwStage").value;
+  const list = FRAMEWORKS.filter(f =>
+    (stage === "all" || f.stage === stage) &&
+    (!q || (f.name + " " + f.what + " " + f.stage + " " + f.ex[current.id]).toLowerCase().includes(q) ||
+      (q.startsWith("prior") && f.stage === "Prioritise"))
+  );
+  const grid = document.getElementById("fwGrid");
+  if (!list.length) { grid.replaceChildren(el("div", { class: "empty", text: "No frameworks match that search. Try a stage such as Discover or Measure." })); return; }
+  grid.replaceChildren(...list.map(f => {
+    const det = el("details", {}, [el("summary", { text: "How to run it" }), el("ol", {}, f.steps.map(s => el("li", { text: s }))), el("p", { class: "when", text: f.when })]);
+    return el("article", { class: "fw" }, [
+      el("div", { class: "fw-top" }, [el("h3", { text: f.name }), el("span", { class: "label", text: f.stage })]),
+      el("p", { class: "what", text: f.what }),
+      el("div", { class: "apply" }, [el("span", { class: "label", text: "In " + current.short }), el("p", { text: f.ex[current.id] })]),
+      det
+    ]);
+  }));
+}
+
+function renderTrends() {
+  document.getElementById("trendIndustryName").textContent = current.short;
+  document.getElementById("trendList").replaceChildren(...current.trends.map(t =>
+    el("article", { class: "trend" }, [el("h3", { text: t.t }), el("p", { text: t.d }), el("p", { class: "q" }, [el("b", { text: "Interview question" }), t.q])])
+  ));
+}
+
+function renderPrinciples() {
+  document.getElementById("prIndustryName").textContent = current.short;
+  document.getElementById("prGrid").replaceChildren(...PRINCIPLES.map(p => {
+    const links = el("div", { class: "links" }, [el("span", { class: "label", text: "Put into practice with" })].concat(p.fw.map(name => {
+      const b = el("button", { class: "fw-link", type: "button", text: name });
+      b.addEventListener("click", () => {
+        document.getElementById("fwStage").value = "all";
+        document.getElementById("fwSearch").value = name;
+        renderFrameworks();
+        document.getElementById("frameworks").scrollIntoView({ behavior: window.matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth" });
+      });
+      return b;
+    })));
+    return el("article", { class: "pr", id: "pr-" + p.id }, [
+      el("h3", { text: p.title }),
+      el("p", { class: "why", text: p.why }),
+      el("p", { class: "ask" }, [el("b", { text: "Ask yourself" }), p.ask]),
+      el("div", { class: "apply" }, [el("span", { class: "label", text: "In " + current.short }), el("p", { text: p.ex[current.id] })]),
+      links
+    ]);
+  }));
+}
+
+function selectIndustry(id) {
+  current = INDUSTRIES.find(i => i.id === id) || INDUSTRIES[0];
+  store.set("pmfg-industry", current.id);
+  renderTabs(); renderBrief(); renderPrinciples(); renderFrameworks(); renderTrends();
+}
+
+function renderRegChecks(selected) {
+  const box = document.getElementById("regIndustries");
+  box.replaceChildren(...INDUSTRIES.map(ind => {
+    const input = el("input", { type: "checkbox", id: "regInd-" + ind.id, value: ind.id, "aria-label": ind.name });
+    input.checked = selected.includes(ind.id);
+    return el("label", { class: "check", for: "regInd-" + ind.id }, [input, el("span", { text: ind.short })]);
+  }));
+}
+
+document.getElementById("fwSearch").addEventListener("input", renderFrameworks);
+document.getElementById("fwStage").addEventListener("change", renderFrameworks);
+document.getElementById("ctaJoin").addEventListener("click", () => setTimeout(() => document.getElementById("regName").focus(), 300));
+
+selectIndustry(current.id);
+renderRegChecks([current.id]);
+
+/* ---------- Phone helpers ---------- */
+function setupCarousel(listId, dotsId, hintId, noun) {
+  const list = document.getElementById(listId), dots = document.getElementById(dotsId), hint = document.getElementById(hintId);
+  function update() {
+    const items = [...list.children].filter(c => !c.classList.contains("empty"));
+    const n = items.length;
+    if (!n) { dots.replaceChildren(); hint.textContent = ""; return; }
+    const w = items[0].getBoundingClientRect().width + 12;
+    const idx = Math.min(n - 1, Math.max(0, Math.round(list.scrollLeft / (w || 1))));
+    if (dots.children.length !== n) dots.replaceChildren(...items.map(() => document.createElement("i")));
+    [...dots.children].forEach((d, i) => d.classList.toggle("on", i === idx));
+    hint.textContent = n > 1 ? (idx + 1) + " of " + n + " " + noun + " · swipe" : "1 " + noun.replace(/s$/, "");
+  }
+  list.addEventListener("scroll", () => requestAnimationFrame(update), { passive: true });
+  new MutationObserver(() => { list.scrollLeft = 0; update(); }).observe(list, { childList: true });
+  window.addEventListener("resize", update);
+  update();
+}
+setupCarousel("prGrid", "prDots", "prHint", "principles");
+setupCarousel("fwGrid", "fwDots", "fwHint", "frameworks");
+setupCarousel("trendList", "trendDots", "trendHint", "trends");
+
+const mbarSel = document.getElementById("mbarInd");
+mbarSel.replaceChildren(...INDUSTRIES.map(i => { const o = document.createElement("option"); o.value = i.id; o.textContent = i.name; return o; }));
+mbarSel.value = current.id;
+mbarSel.addEventListener("change", () => selectIndustry(mbarSel.value));
+document.getElementById("mbarJoin").addEventListener("click", () => setTimeout(() => document.getElementById("regName").focus(), 300));
+
+const _select = selectIndustry;
+selectIndustry = function (id) {
+  _select(id);
+  mbarSel.value = current.id;
+  const tab = document.getElementById("tab-" + current.id), box = document.getElementById("industryTabs");
+  if (tab && box.scrollWidth > box.clientWidth) box.scrollTo({ left: tab.offsetLeft - box.offsetLeft - 16, behavior: "smooth" });
+};
+
+(function () {
+  const bar = document.getElementById("mbar");
+  document.body.classList.add("has-mbar");
+  let heroGone = false, joinVisible = true;
+  const sync = () => bar.classList.toggle("show", heroGone && !joinVisible);
+  if (!("IntersectionObserver" in window)) { bar.classList.add("show"); return; }
+  new IntersectionObserver(([e]) => { joinVisible = e.isIntersecting; sync(); }, { threshold: 0.15 }).observe(document.getElementById("join"));
+  new IntersectionObserver(([e]) => { heroGone = !e.isIntersecting; sync(); }).observe(document.querySelector(".hero h1"));
+})();
+
+/* ---------- Sticky header: section highlight ---------- */
+(function () {
+  const header = document.querySelector(".top");
+  const nav = header.querySelector("nav");
+  const links = [...nav.querySelectorAll('a[href^="#"]')];
+  const setH = () => document.documentElement.style.setProperty("--head-h", header.offsetHeight + "px");
+  setH(); window.addEventListener("resize", setH);
+  window.addEventListener("scroll", () => header.classList.toggle("scrolled", window.scrollY > 4), { passive: true });
+  document.getElementById("brandLink").addEventListener("click", (e) => {
+    e.preventDefault();
+    window.scrollTo({ top: 0, behavior: window.matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth" });
+  });
+  const ids = ["industries", "principles", "frameworks", "trends"];
+  const sections = ids.map(id => document.getElementById(id)).filter(Boolean);
+  let active = null;
+  function mark() {
+    const line = header.offsetHeight + window.innerHeight * 0.3;
+    let cur = null;
+    for (const s of sections) if (s.getBoundingClientRect().top <= line) cur = s.id;
+    if (window.scrollY < 40) cur = null;
+    if (cur === active) return;
+    active = cur;
+    links.forEach(a => {
+      const on = a.getAttribute("href") === "#" + cur;
+      if (on) { a.setAttribute("aria-current", "true"); if (nav.scrollWidth > nav.clientWidth) nav.scrollTo({ left: a.offsetLeft - 8, behavior: "smooth" }); }
+      else a.removeAttribute("aria-current");
+    });
+  }
+  window.addEventListener("scroll", () => requestAnimationFrame(mark), { passive: true });
+  window.addEventListener("resize", mark);
+  mark();
+})();
+
+/* ---------- Registration (Formspree) ----------
+   Paste your Formspree form ID between the quotes, e.g. "xyzabcd".
+   Find it at formspree.io: your form's endpoint is https://formspree.io/f/<ID>. */
+const FORMSPREE_ID = "xgakoknd";
+const msg = document.getElementById("regMsg");
+
+function showDone(data) {
+  document.getElementById("signupForm").hidden = true;
+  document.getElementById("signupDone").hidden = false;
+  const names = data.industries.map(id => (INDUSTRIES.find(i => i.id === id) || {}).short).filter(Boolean);
+  document.getElementById("doneTitle").textContent = "You're registered, " + data.name.split(" ")[0];
+  document.getElementById("doneText").textContent = "We'll email trend updates for " + names.join(", ") + " to " + data.email + ".";
+}
+
+document.getElementById("editReg").addEventListener("click", () => {
+  document.getElementById("signupDone").hidden = true;
+  document.getElementById("signupForm").hidden = false;
+  document.getElementById("regName").focus();
+});
+
+document.getElementById("regForm").addEventListener("submit", async (e) => {
+  e.preventDefault();
+  msg.className = "form-msg"; msg.textContent = "";
+  const name = document.getElementById("regName").value.trim();
+  const email = document.getElementById("regEmail").value.trim();
+  const stage = document.getElementById("regStage").value;
+  const industries = [...document.querySelectorAll("#regIndustries input:checked")].map(i => i.value);
+  const consent = document.getElementById("regConsent").checked;
+  const err = (t, focusId) => { msg.className = "form-msg err"; msg.textContent = t; if (focusId) document.getElementById(focusId).focus(); };
+  if (!name) return err("Enter your name.", "regName");
+  if (!/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(email)) return err("Enter a valid email address, like name@example.com.", "regEmail");
+  if (!stage) return err("Choose where you are today.", "regStage");
+  if (!industries.length) return err("Pick at least one industry to follow.");
+  if (!consent) return err("Tick the box to agree to receive the digest.", "regConsent");
+
+  document.getElementById("regIndustriesField").value = industries.join(", ");
+  if (!FORMSPREE_ID || FORMSPREE_ID === "YOUR_FORM_ID") return err("Registration isn't set up yet. The site owner needs to add a Formspree form ID.");
+  const body = new URLSearchParams({
+    name, email, stage: STAGE_LABELS[stage] || stage, _subject: "New PM Field Guide registration",
+    industries: industries.map(id => (INDUSTRIES.find(i => i.id === id) || {}).name || id).join(", "),
+    consent: "yes", _gotcha: document.getElementById("regHoney").value
+  });
+  const btn = document.getElementById("regSubmit");
+  btn.disabled = true; btn.textContent = "Registering…";
+  try {
+    const res = await fetch("https://formspree.io/f/" + FORMSPREE_ID, { method: "POST", headers: { "Content-Type": "application/x-www-form-urlencoded", "Accept": "application/json" }, body: body.toString() });
+    if (!res.ok) {
+      let detail = null;
+      try {
+        const j = await res.json();
+        if (j && Array.isArray(j.errors) && j.errors.length) detail = j.errors.map(x => x.message).filter(Boolean).join(" ");
+      } catch (_) {}
+      const e2 = new Error("HTTP " + res.status); e2.detail = detail; e2.status = res.status; throw e2;
+    }
+    const data = { name, email, industries };
+    store.set("pmfg-registered", JSON.stringify(data));
+    showDone(data);
+  } catch (ex) {
+    if (ex && ex.detail) err("Registration didn't go through: " + ex.detail);
+    else if (ex && ex.status === 429) err("Too many sign-ups right now. Please try again in a few minutes.");
+    else if (ex && ex.status) err("Registration didn't go through (error " + ex.status + "). Please try again later.");
+    else err("Registration didn't go through. Check your internet connection and try again.");
+  } finally {
+    btn.disabled = false; btn.textContent = "Register for free";
+  }
+});
+
+try {
+  const saved = JSON.parse(store.get("pmfg-registered") || "null");
+  if (saved && saved.email) showDone(saved);
+} catch (e) {}
+</script>
+
+</body>
+</html>

@@ -1,0 +1,9 @@
+{
+ "craft": ["lennysnewsletter.com","svpg.com","producttalk.org","mindtheproduct.com","reforge.com","review.firstround.com","firstround.com","cutlefish.substack.com","news.aakashg.com","elenaverna.com","hbr.org","mckinsey.com"],
+ "retail": ["retaildive.com","modernretail.co","retail.economictimes.indiatimes.com","inc42.com","livemint.com","business-standard.com","thehindubusinessline.com","reuters.com"],
+ "pharma": ["fiercepharma.com","endpts.com","statnews.com","pharmaceutical-technology.com","fda.gov","cdsco.gov.in","ema.europa.eu","reuters.com","pharma.economictimes.indiatimes.com"],
+ "health": ["mobihealthnews.com","medcitynews.com","fiercehealthcare.com","health.economictimes.indiatimes.com","statnews.com","fda.gov","abdm.gov.in","who.int","nature.com","nejm.org","reuters.com"],
+ "telecom": ["lightreading.com","rcrwireless.com","fierce-network.com","gsma.com","telecom.economictimes.indiatimes.com","trai.gov.in","dot.gov.in","pib.gov.in","reuters.com"],
+ "fintech": ["finextra.com","techcrunch.com","entrackr.com","inc42.com","the-ken.com","bfsi.economictimes.indiatimes.com","rbi.org.in","npci.org.in","sebi.gov.in","business-standard.com","livemint.com","thehindubusinessline.com","medianama.com","reuters.com"],
+ "saas": ["saastr.com","a16z.com","bvp.com","techcrunch.com","stratechery.com","reuters.com"]
+}

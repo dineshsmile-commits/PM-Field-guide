@@ -1,0 +1,129 @@
+A 12-hour wait for payment apps, a new stroke drug, Oura's AI bet and what PM hiring looks like now.
+
+☕ Product Over Chai
+
+A fortnightly 5-minute read for aspiring PMs · Issue 1 · 15 November 2026
+
+by PM Field Guide
+
+Pour yourself a cup
+
+This fortnight's thread: the rules around a product shape the product. RBI's new cyber security direction changes how payment apps handle something as ordinary as a phone number change, and NPCI is defending who pays a UPI fee. Inside: one big story, quick sips from six industries, two reads and an interview question to practise.
+
+Team PM Field Guide
+
+The big sip
+
+What RBI's consolidated cyber security rules mean for payment apps and users (https://www.medianama.com/2026/11/223-rbi-cyber-security-rules-payment-companies/)
+
+MediaNama · 9 November 2026
+
+What happened. On 5 November, RBI issued a single master direction that consolidates cyber security rules for non-bank payment system operators. Users get a minimum 12-hour cooling period on online payments after changing their registered mobile number or email, and apps must block access while remote access apps are live, to the extent possible. Incidents must be reported to RBI within six hours of detection.
+
+Why it matters. This rule lands straight in the user journey. The PM who reads it early designs the experience instead of patching it later.
+
+If you were the PM. First ask how many users change their number each month and what they try to do next. Then decide how to explain the wait so it feels like protection, and how to detect remote access apps without locking out genuine users.
+
+Quick sips from six industries
+
+Retail & E-commerce
+
+Holiday hiring looks different this year. Here's why. (https://www.retaildive.com/news/why-retail-holiday-hiring-looks-different-2026/873988/)
+
+Retail Dive · 10 November 2026
+
+Indeed data shows part-time labels on large employers' postings rising from 38% to 49% as "seasonal" labels fall.
+
+For PMs: Scheduling tools must now serve a year-round part-time pool, not a holiday spike.
+
+Pharma & Life Sciences
+
+FDA approves novel Bayer drug to reduce recurrence of stroke (https://www.statnews.com/2026/11/09/cardiovascular-stroke-recurrence-bayer-drug-fda-approval/)
+
+STAT · 9 November 2026
+
+Sunharbo, first in a new class, inhibits a protein called XIa and is thought to stop harmful clots without raising bleeding risk.
+
+For PMs: Ask which trade-off is keeping your product from a whole segment of users.
+
+Health Sciences & MedTech
+
+Oura to acquire Counsel Health for $625 million, placing a big bet on AI care (https://www.statnews.com/2026/11/10/oura-acquires-counsel-health-big-bet-ai-care/)
+
+STAT · 10 November 2026
+
+Counsel's chatbot lets users discuss health concerns before handing them to a clinician over telehealth.
+
+For PMs: Map what happens after your user sees a number.
+
+Telecom & Connectivity
+
+Quiet fortnight
+
+Background, not news: tariffs and satellite broadband remain Indian telecom's open questions. We found no verified story this fortnight.
+
+Fintech & Banking
+
+NPCI tells Supreme Court merchants cannot pass new UPI charges on to customers (https://www.medianama.com/2026/11/223-npci-defends-upi-mdr-charges-supreme-court/)
+
+MediaNama · 6 November 2026
+
+NPCI says the UPI MDR is capped at 0.4% and applies only to merchant payments above Rs 2,000.
+
+For PMs: With about 96% of merchant payments at Rs 2,000 or less, thresholds decide who actually feels a price.
+
+B2B SaaS & Enterprise
+
+Muse can now place calls to US businesses, if you pay (https://techcrunch.com/2026/11/12/muse-can-now-place-calls-to-u-s-businesses-if-you-pay/)
+
+TechCrunch · 12 November 2026
+
+Meta's agent calls businesses for users only on paid plans, from $20 a month.
+
+For PMs: Costly agent actions are moving behind usage-based tiers.
+
+From the PM bookshelf
+
+State of the tech job market: late 2026 (https://www.lennysnewsletter.com/p/state-of-the-tech-job-market-late)
+
+Lenny Rachitsky, Lenny's Newsletter · 10 November 2026
+
+PM openings are at a near four-year high, up 75% from the March 2023 low. "LLM" is now the most-mentioned skill in PM job descriptions.
+
+Try this: Highlight every AI requirement in five PM job posts and write one line of evidence for each.
+
+Why PMs are suddenly valuable again (https://lennysnewsletter.com/p/what-it-actually-takes-to-build-frontier)
+
+Lenny's Podcast with Tulsee Doshi · 8 November 2026
+
+Doshi, who leads product for Google's Gemini models, explains how to write your first eval. She shares a 60-20-20 framework that balances what works now against what is almost working.
+
+Try this: Write five test prompts for an AI feature you use, define a good answer, and score it.
+
+Framework of the fortnight · Kano model
+
+Kano sorts features into basic expectations, performance features and delighters. Payment security is a basic expectation: nobody thanks you when it works, and everyone leaves when it fails. RBI's cooling period adds friction to protect that need. So don't sell the wait as a feature; make it clear and predictable. Explore Kano and other frameworks at PM Field Guide (https://dineshsmile-commits.github.io/PM-Field-guide/#frameworks).
+
+Something to chew on
+
+"You are the PM for a UPI payments app. RBI now requires a 12-hour cooling period on online payments after a user changes their registered mobile number. How would you roll this out while keeping drop-off low?"
+
+A strong answer covers:
+
+- Scope and data: who changes numbers, and what they try to do next.
+
+- Experience design: warn before the change, explain the wait, show a countdown.
+
+- Measurement: track drop-off and fraud; compliance is fixed.
+
+Last sip
+
+Rules from a regulator, a court or a pricing page are part of your product, so read them closely.
+
+Hit reply and tell us which industry or framework you would like us to unpack next.
+
+Explore the frameworks and industry briefs at PM Field Guide: https://dineshsmile-commits.github.io/PM-Field-guide/
+
+You're receiving Product Over Chai because you registered at PM Field Guide. Reply 'unsubscribe' to stop.
+
+Every story links to its original source. Summaries are ours.
